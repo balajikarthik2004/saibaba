@@ -1,10 +1,22 @@
-﻿import { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, Heart, X } from 'lucide-react'
 import { albums, galleryItems } from '../data/community'
 import { templeById } from '../data/temples'
 import { useApp } from '../lib/store'
 import { cn, fmtDate, useReveal } from '../lib/utils'
-import { ArtTile, Divider } from '../components/Sacred'
+import { Divider } from '../components/Sacred'
+import { Photo } from '../components/Photo'
+import { photos, type PhotoKey } from '../data/images'
+
+/** The gallery mixes every pool, so each item gets a distinct photograph. */
+const galleryKeys: PhotoKey[] = [
+  'procession', 'aartiThali', 'deepLights', 'dhuniFire', 'langarServing', 'goshala',
+  'usTempleA', 'utsavRally', 'havanRitual', 'bhajanMandali', 'marigoldHeap', 'kitchenOpen',
+  'templeTower', 'kitchenVolunteers', 'devoteesPraying', 'pandalNight', 'diyaRow', 'templeBell',
+  'samadhiMandir', 'prasadSweets',
+]
+const galleryPhoto = (i: number) => photos[galleryKeys[i % galleryKeys.length]]
 import { Badge, Chip, PageHeader, Panel, Section } from '../components/ui'
 
 export default function Gallery() {
@@ -23,6 +35,7 @@ export default function Gallery() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.utsavRally}
         eyebrow="Gallery"
         title="A year in the sannidhis"
         sub="Palki at dusk, two thousand plates on a Thursday, a thousand lamps on the prakaram wall, and the Dhuni that has not gone out since 2003."
@@ -52,7 +65,12 @@ export default function Gallery() {
                   tall && 'row-span-2',
                 )}
               >
-                <ArtTile seed={g.art} className="transition-transform duration-[900ms] group-hover:scale-110" />
+                <Photo
+                  photo={galleryPhoto(g.art)}
+                  fill
+                  fallbackSeed={g.art}
+                  imgClassName="transition-transform duration-[900ms] group-hover:scale-110"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-bg-deep/25 to-transparent opacity-85 transition-opacity duration-500 group-hover:opacity-95" />
 
                 <span
@@ -74,7 +92,7 @@ export default function Gallery() {
                   <Badge tone="gold">{g.album}</Badge>
                   <p className="mt-2.5 text-balance font-display text-[17px] leading-snug text-ink">{g.title}</p>
                   <p className="mt-1 text-[11.5px] text-ink-faint">
-                    {templeById(g.templeId)?.shortName} Â· {fmtDate(g.date)}
+                    {templeById(g.templeId)?.shortName} · {fmtDate(g.date)}
                   </p>
                 </div>
               </button>
@@ -82,9 +100,14 @@ export default function Gallery() {
           })}
         </div>
 
-        <p className="reveal mt-10 text-center text-[12px] text-ink-faint">
-          Artwork is generated for this demonstration build. Real temple photography drops into the same grid once
-          the media library is connected.
+        <p className="reveal mt-10 text-center text-[12px] leading-relaxed text-ink-faint">
+          Photographs are licensed images from Wikimedia Commons standing in for the temples&rsquo; own archives �
+          see{' '}
+          <Link to="/credits" className="text-gold transition-colors hover:text-ember">
+            image credits
+          </Link>
+          . Replace the <code className="text-gold-light">src</code> of each entry in{' '}
+          <code className="text-gold-light">src/data/images.ts</code> to swap in your own.
         </p>
       </Section>
 
@@ -97,17 +120,16 @@ export default function Gallery() {
           />
           <div className="rise-in relative z-10 w-[min(96vw,980px)]">
             <Panel className="overflow-hidden">
-              <div className="relative aspect-[16/9]">
-                <ArtTile seed={open.art} />
+              <Photo photo={galleryPhoto(open.art)} ratio="16/9" className="w-full" priority fallbackSeed={open.art}>
                 <div className="absolute inset-0 bg-gradient-to-t from-surface/90 via-transparent to-transparent" />
-              </div>
+              </Photo>
               <div className="px-8 py-7">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div>
                     <Badge tone="gold">{open.album}</Badge>
                     <h2 className="mt-3 font-display text-2xl">{open.title}</h2>
                     <p className="mt-1 text-[12.5px] text-ink-faint">
-                      {templeById(open.templeId)?.name} Â· {fmtDate(open.date)}
+                      {templeById(open.templeId)?.name} · {fmtDate(open.date)}
                     </p>
                   </div>
                   <button

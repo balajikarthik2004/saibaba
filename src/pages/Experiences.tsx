@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Flame, PenLine, X } from 'lucide-react'
 import { experiences } from '../data/community'
 import { useApp } from '../lib/store'
@@ -6,6 +6,7 @@ import type { Experience } from '../lib/types'
 import { cn, fmtDate, slugId, useReveal } from '../lib/utils'
 import { Divider, EmberField, Mandala, OmMark } from '../components/Sacred'
 import { Button, Chip, Field, Input, PageHeader, Panel, Section, Textarea } from '../components/ui'
+import { photos } from '../data/images'
 
 const allTags = Array.from(new Set(experiences.flatMap((e) => e.tags))).sort()
 
@@ -24,9 +25,10 @@ export default function Experiences() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.devoteesPraying}
         eyebrow="Devotee experiences"
         title="What people actually say happened"
-        sub="Unedited accounts from devotees across the network. Babaâ€™s leelas were never argued into existence â€” they were told, by one person to another, over tea."
+        sub="Unedited accounts from devotees across the network. Baba’s leelas were never argued into existence — they were told, by one person to another, over tea."
       >
         <Button onClick={() => setWriting(true)}>
           <PenLine size={15} /> Share your experience
@@ -62,7 +64,7 @@ export default function Experiences() {
                 <div className="mt-6 flex items-center justify-between border-t border-line pt-4">
                   <span className="text-[12.5px]">
                     <span className="text-ink">{e.author}</span>
-                    <span className="text-ink-faint"> Â· {e.city} Â· {fmtDate(e.date)}</span>
+                    <span className="text-ink-faint"> · {e.city} · {fmtDate(e.date)}</span>
                   </span>
                   <button
                     onClick={() => toggleBlessing(e.id)}
@@ -91,7 +93,7 @@ export default function Experiences() {
             <h2 className="mt-6 text-balance text-3xl leading-tight">Hemadpant wrote his down. Write yours.</h2>
             <p className="mt-5 text-[15px] leading-relaxed text-ink-soft">
               Baba told Hemadpant to collect the stories and keep a record, and said He would be the one doing the
-              writing. Whatever brought you to the sannidhi â€” write it plainly. Someone reading it will need it.
+              writing. Whatever brought you to the sannidhi — write it plainly. Someone reading it will need it.
             </p>
             <Button onClick={() => setWriting(true)} size="lg" className="mt-9">
               <PenLine size={16} /> Share your experience
@@ -208,7 +210,7 @@ function WriteModal({
                 setError('')
               }}
               className="min-h-44"
-              placeholder="Write it the way you would tell it to someone sitting next to youâ€¦"
+              placeholder="Write it the way you would tell it to someone sitting next to you…"
             />
           </Field>
 

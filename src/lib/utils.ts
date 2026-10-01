@@ -11,15 +11,22 @@ export const usd = (n: number, cents = false) =>
     maximumFractionDigits: cents ? 2 : 0,
   })
 
+/**
+ * Accepts both a plain "YYYY-MM-DD" and a full ISO timestamp. The date-only
+ * form is pinned to midday so it never slips a day across time zones.
+ */
+const asDate = (iso: string | Date) =>
+  typeof iso === 'string' ? new Date(/^\d{4}-\d{2}-\d{2}$/.test(iso) ? `${iso}T12:00:00` : iso) : iso
+
 export const fmtDate = (iso: string | Date) =>
-  new Date(typeof iso === 'string' ? `${iso}T12:00:00` : iso).toLocaleDateString('en-US', {
+  asDate(iso).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
     year: 'numeric',
   })
 
 export const fmtDateLong = (iso: string | Date) =>
-  new Date(typeof iso === 'string' ? `${iso}T12:00:00` : iso).toLocaleDateString('en-US', {
+  asDate(iso).toLocaleDateString('en-US', {
     weekday: 'long',
     month: 'long',
     day: 'numeric',
@@ -142,14 +149,17 @@ export function daysUntil(iso: string) {
   return Math.round((target.getTime() - today.getTime()) / 86400000)
 }
 
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`
+
 export function relativeDay(iso: string) {
   const d = daysUntil(iso)
   if (d === 0) return 'Today'
   if (d === 1) return 'Tomorrow'
-  if (d < 0) return `${Math.abs(d)} days ago`
-  if (d < 7) return `In ${d} days`
-  if (d < 31) return `In ${Math.ceil(d / 7)} weeks`
-  return `In ${Math.round(d / 30)} months`
+  if (d === -1) return 'Yesterday'
+  if (d < 0) return `${plural(Math.abs(d), 'day')} ago`
+  if (d < 7) return `In ${plural(d, 'day')}`
+  if (d < 31) return `In ${plural(Math.ceil(d / 7), 'week')}`
+  return `In ${plural(Math.round(d / 30), 'month')}`
 }
 
 export const slugId = (prefix: string) =>

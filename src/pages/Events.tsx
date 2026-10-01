@@ -1,11 +1,12 @@
-﻿import { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CalendarDays, ChevronLeft, ChevronRight, LayoutGrid, MapPin, Users } from 'lucide-react'
 import { eventCategories, events } from '../data/events'
 import { temples } from '../data/temples'
 import { useApp } from '../lib/store'
 import { cn, fmtDayMonth, relativeDay, useReveal } from '../lib/utils'
-import { ArtTile } from '../components/Sacred'
+import { Photo } from '../components/Photo'
+import { fromPool, photos } from '../data/images'
 import { Badge, Button, Chip, PageHeader, Panel, Progress, Section } from '../components/ui'
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -31,9 +32,10 @@ export default function Events() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.procession}
         eyebrow="Festivals & events"
         title="The year, kept together"
-        sub="Vijayadashami Punyatithi, Ram Navami Urs, Navratri, Datta Jayanti â€” and the Thursday palki that never misses a week."
+        sub="Vijayadashami Punyatithi, Ram Navami Urs, Navratri, Datta Jayanti — and the Thursday palki that never misses a week."
       />
 
       <Section wide className="pt-0">
@@ -86,16 +88,20 @@ export default function Events() {
                 to={`/events/${e.id}`}
                 className="reveal group panel grid overflow-hidden sm:grid-cols-[180px_1fr]"
               >
-                <div className="relative h-40 overflow-hidden sm:h-full">
-                  <ArtTile seed={i + 1} className="transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-surface sm:to-surface" />
+                <Photo
+                  photo={fromPool('festivals', i)}
+                  className="h-40 w-full sm:h-full"
+                  fallbackSeed={i + 1}
+                  imgClassName="transition-transform duration-700 group-hover:scale-105"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent sm:bg-gradient-to-r sm:from-transparent sm:to-surface" />
                   <div className="absolute left-4 top-4 rounded-xl border border-line-strong bg-bg-deep/80 px-3 py-2 text-center backdrop-blur">
                     <p className="font-display text-xl leading-none text-ink">{e.date.slice(8, 10)}</p>
                     <p className="mt-0.5 text-[9.5px] uppercase tracking-[0.18em] text-gold">
                       {MONTHS[Number(e.date.slice(5, 7)) - 1].slice(0, 3)}
                     </p>
                   </div>
-                </div>
+                </Photo>
 
                 <div className="px-6 py-6">
                   <div className="flex flex-wrap gap-2">
@@ -106,7 +112,7 @@ export default function Events() {
                   <p className="mt-2.5 line-clamp-3 text-[13.5px] leading-relaxed text-ink-soft">{e.summary}</p>
                   <p className="mt-4 text-[12px] text-ink-faint">
                     {e.templeIds === 'all' ? 'All ten sannidhis' : `${e.templeIds.length} sannidhis`}
-                    {e.endDate ? ` Â· ${fmtDayMonth(e.date)} â€“ ${fmtDayMonth(e.endDate)}` : ''}
+                    {e.endDate ? ` · ${fmtDayMonth(e.date)} – ${fmtDayMonth(e.endDate)}` : ''}
                   </p>
                   {e.rsvp && e.seats && (
                     <div className="mt-4">
@@ -125,9 +131,9 @@ export default function Events() {
 
       <Section wide className="pb-24">
         <Panel className="reveal flex flex-col items-center gap-5 px-8 py-12 text-center">
-          <p className="font-deva text-[15px] text-gold">à¤¶à¥à¤°à¤¦à¥à¤§à¤¾ à¤”à¤° à¤¸à¤¬à¥‚à¤°à¥€</p>
+          <p className="font-deva text-[15px] text-gold">श्रद्धा और सबूरी</p>
           <h2 className="max-w-2xl text-balance text-3xl leading-tight">
-            Every festival ends the same way â€” with everyone eating together.
+            Every festival ends the same way — with everyone eating together.
           </h2>
           <p className="max-w-xl text-[14.5px] leading-relaxed text-ink-soft">
             Annadanam is served at every event in this calendar, free, to anyone who comes. Sponsor a day, or come
@@ -258,7 +264,7 @@ function CalendarView({
           <span className="size-2.5 rounded bg-ember/25" /> Festival or event
         </span>
         <span className="flex items-center gap-2">
-          <span className="size-2.5 rounded border border-ember/30 bg-ember/[0.06]" /> Thursday â€” palki & annadanam
+          <span className="size-2.5 rounded border border-ember/30 bg-ember/[0.06]" /> Thursday — palki & annadanam
         </span>
         <span className="flex items-center gap-2">
           <span className="size-2.5 rounded ring-1 ring-ember" /> Today

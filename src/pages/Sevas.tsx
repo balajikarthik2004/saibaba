@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Check, Search, X } from 'lucide-react'
 import { gotras, nakshatras, sevaCategories, sevas } from '../data/sevas'
 import { temples } from '../data/temples'
@@ -7,6 +7,7 @@ import type { Seva } from '../lib/types'
 import { cn, usd, useReveal } from '../lib/utils'
 import { Divider, Mandala } from '../components/Sacred'
 import { Badge, Button, Chip, Field, Input, PageHeader, Panel, Section, Select, Textarea } from '../components/ui'
+import { photos } from '../data/images'
 
 const timeSlots = ['06:30', '08:00', '09:30', '11:00', '12:00', '16:00', '17:30', '18:30', '20:00']
 
@@ -30,6 +31,7 @@ export default function Sevas() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.priestPuja}
         eyebrow="Sevas & poojas"
         title="Offer a seva in your name and gotra"
         sub="Twenty sevas, from a twenty-minute archana to a full temple wedding. Anything marked Virtual is performed at the sannidhi and the prasad posted to you."
@@ -43,7 +45,7 @@ export default function Sevas() {
               <Input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search sevas â€” archana, abhishekam, homamâ€¦"
+                placeholder="Search sevas — archana, abhishekam, homam…"
                 className="pl-11"
               />
             </div>
@@ -133,7 +135,7 @@ export default function Sevas() {
             {[
               {
                 t: 'What is a gotra?',
-                b: 'A paternal lineage name used in the sankalpa so the seva is offered specifically for you. If you do not know yours, choose "Not known" â€” the priest uses the universal Kashyapa gotra, which is the traditional provision for exactly that case.',
+                b: 'A paternal lineage name used in the sankalpa so the seva is offered specifically for you. If you do not know yours, choose "Not known" — the priest uses the universal Kashyapa gotra, which is the traditional provision for exactly that case.',
               },
               {
                 t: 'Can I book from far away?',
@@ -214,7 +216,7 @@ function BookingModal({ seva, onClose }: { seva: Seva; onClose: () => void }) {
         {seva.sanskrit && <p className="mt-4 font-deva text-[15px] text-gold-light/80">{seva.sanskrit}</p>}
         <h2 className="mt-1 text-balance font-display text-[26px] leading-snug">{seva.name}</h2>
         <p className="mt-2 text-[13px] text-ink-faint">
-          {usd(seva.price)} Â· {seva.duration}
+          {usd(seva.price)} · {seva.duration}
         </p>
 
         <Divider className="my-6" icon="diya" />
@@ -224,7 +226,7 @@ function BookingModal({ seva, onClose }: { seva: Seva; onClose: () => void }) {
             <Select value={form.templeId} onChange={(e) => set('templeId', e.target.value)}>
               {temples.map((t) => (
                 <option key={t.id} value={t.id}>
-                  {t.shortName} â€” {t.city}, {t.stateCode}
+                  {t.shortName} — {t.city}, {t.stateCode}
                 </option>
               ))}
             </Select>
@@ -269,7 +271,7 @@ function BookingModal({ seva, onClose }: { seva: Seva; onClose: () => void }) {
 
           {seva.requiresGotra && (
             <>
-              <Field label="Gotra" hint="Choose â€œNot knownâ€ if unsure">
+              <Field label="Gotra" hint="Choose “Not known” if unsure">
                 <Select value={form.gotra} onChange={(e) => set('gotra', e.target.value)}>
                   {gotras.map((g) => (
                     <option key={g} value={g}>
@@ -295,7 +297,7 @@ function BookingModal({ seva, onClose }: { seva: Seva; onClose: () => void }) {
               <Textarea
                 value={form.note}
                 onChange={(e) => set('note', e.target.value)}
-                placeholder="For the health of my mother Â· In memory ofâ€¦"
+                placeholder="For the health of my mother · In memory of…"
               />
             </Field>
           </div>

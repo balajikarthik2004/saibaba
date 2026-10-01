@@ -1,16 +1,19 @@
-﻿import { useEffect, useRef, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import {
   Check,
   ChevronDown,
   Flame,
   Globe,
   Heart,
+  LayoutDashboard,
+  LogOut,
   Mail,
   MapPin,
   Menu,
   Moon,
   Phone,
+  Settings,
   ShoppingBag,
   Sun,
   User,
@@ -68,7 +71,7 @@ export function Header() {
   const location = useLocation()
   const headerRef = useRef<HTMLElement>(null)
 
-  // Close every open panel when the route changes â€” adjusted during render
+  // Close every open panel when the route changes — adjusted during render
   // rather than in an effect, so the menus never flash open on the new page.
   const [lastPath, setLastPath] = useState(location.pathname)
   if (lastPath !== location.pathname) {
@@ -128,7 +131,7 @@ export function Header() {
             <span className="leading-none">
               <span className="block font-display text-[17px] tracking-wide text-ink">Sai Sannidhi</span>
               <span className="mt-0.5 block text-[9.5px] uppercase tracking-[0.3em] text-gold/80">
-                Shirdi Sai Â· North America
+                Shirdi Sai · North America
               </span>
             </span>
           </Link>
@@ -228,7 +231,7 @@ export function Header() {
                       <span className="flex-1">
                         <span className="block text-[13px] text-ink">{x.shortName}</span>
                         <span className="block text-[11px] text-ink-faint">
-                          {x.city}, {x.stateCode} Â· {x.tzLabel}
+                          {x.city}, {x.stateCode} · {x.tzLabel}
                         </span>
                       </span>
                       {x.id === temple.id && <Check size={14} className="text-ember" />}
@@ -238,7 +241,7 @@ export function Header() {
                     to="/temples"
                     className="mt-1 block rounded-xl px-3 py-2.5 text-[12px] text-gold hover:bg-surface-2"
                   >
-                    Find the sannidhi nearest you â†’
+                    Find the sannidhi nearest you →
                   </Link>
                 </div>
               )}
@@ -299,13 +302,7 @@ export function Header() {
               )}
             </Link>
 
-            <Link
-              to="/account"
-              className="hidden size-9 place-items-center rounded-full border border-line text-ink-soft transition-colors hover:border-line-strong hover:text-ink sm:grid"
-              aria-label="My seva"
-            >
-              <User size={15} />
-            </Link>
+            <AccountControl />
 
             <button
               onClick={() => setMobileOpen(true)}
@@ -320,6 +317,89 @@ export function Header() {
 
       {mobileOpen && <MobileMenu onClose={() => setMobileOpen(false)} />}
     </>
+  )
+}
+
+/* ---------------- account control ---------------- */
+
+function AccountControl() {
+  const { user, signOut, notify } = useApp()
+  const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
+
+  if (!user) {
+    return (
+      <Link
+        to="/login"
+        className="hidden items-center gap-2 rounded-full border border-line-strong px-4 py-2 text-[12.5px] text-gold-light transition-colors hover:bg-gold/10 sm:inline-flex"
+      >
+        <User size={14} /> Sign in
+      </Link>
+    )
+  }
+
+  const initials = user.name
+    .split(' ')
+    .slice(0, 2)
+    .map((p) => p[0])
+    .join('')
+    .toUpperCase()
+
+  return (
+    <div className="relative hidden sm:block">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-2 rounded-full border border-line bg-surface/60 py-1 pl-1 pr-3 transition-colors hover:border-line-strong"
+      >
+        <span className="grid size-7 place-items-center rounded-full bg-gradient-to-br from-ember-soft to-ember text-[11px] font-medium text-[#1a0d04]">
+          {initials}
+        </span>
+        <span className="max-w-[90px] truncate text-[12.5px] text-ink-soft">{user.name.split(' ')[0]}</span>
+        <ChevronDown size={12} className={cn('text-ink-faint transition-transform', open && 'rotate-180')} />
+      </button>
+
+      {open && (
+        <div className="panel rise-in absolute right-0 top-full mt-2 w-60 p-2">
+          <div className="px-3 py-2.5">
+            <p className="truncate text-[13px] text-ink">{user.name}</p>
+            <p className="truncate text-[11.5px] text-ink-faint">{user.email}</p>
+            <span className="mt-2 inline-block rounded-full border border-ember/35 bg-ember/15 px-2.5 py-0.5 text-[10px] uppercase tracking-[0.16em] text-ember-soft">
+              {user.role}
+            </span>
+          </div>
+          <div className="my-1 h-px bg-line" />
+          {[
+            { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+            { to: '/dashboard/sevas', label: 'My sevas', icon: ShoppingBag },
+            { to: '/dashboard/giving', label: 'Giving & receipts', icon: Heart },
+            { to: '/dashboard/profile', label: 'Profile', icon: Settings },
+          ].map((i) => (
+            <Link
+              key={i.to}
+              to={i.to}
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-[13px] text-ink-soft transition-colors hover:bg-surface-2 hover:text-ink"
+            >
+              <i.icon size={14} className="text-gold" />
+              {i.label}
+            </Link>
+          ))}
+          <div className="my-1 h-px bg-line" />
+          <button
+            onClick={() => {
+              signOut()
+              setOpen(false)
+              notify('Signed out', 'Om Sai Ram')
+              navigate('/')
+            }}
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-[13px] text-ink-soft transition-colors hover:bg-kumkum/10 hover:text-kumkum"
+          >
+            <LogOut size={14} />
+            Sign out
+          </button>
+        </div>
+      )}
+    </div>
   )
 }
 
@@ -344,7 +424,7 @@ function AnnouncementBar() {
 /* ---------------- mobile menu ---------------- */
 
 function MobileMenu({ onClose }: { onClose: () => void }) {
-  const { temple, setTempleId, lang, setLang } = useApp()
+  const { temple, setTempleId, lang, setLang, user } = useApp()
   return (
     <div className="fixed inset-0 z-[60] xl:hidden">
       <button className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} aria-label="Close menu" />
@@ -394,10 +474,10 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
               Donate
             </NavLink>
             <NavLink
-              to="/account"
+              to={user ? '/dashboard' : '/login'}
               className="flex-1 rounded-full border border-line-strong px-4 py-3 text-center text-[13px] text-gold-light"
             >
-              My Seva
+              {user ? 'Dashboard' : 'Sign in'}
             </NavLink>
           </div>
         </nav>
@@ -412,7 +492,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
         >
           {temples.map((x) => (
             <option key={x.id} value={x.id}>
-              {x.shortName} â€” {x.city}, {x.stateCode}
+              {x.shortName} — {x.city}, {x.stateCode}
             </option>
           ))}
         </select>
@@ -433,7 +513,7 @@ function MobileMenu({ onClose }: { onClose: () => void }) {
           ))}
         </div>
 
-        <p className="mt-auto pt-8 text-center font-deva text-sm text-gold/70">à¥ à¤¸à¤¾à¤ˆà¤‚ à¤°à¤¾à¤®</p>
+        <p className="mt-auto pt-8 text-center font-deva text-sm text-gold/70">ॐ साईं राम</p>
       </div>
     </div>
   )
@@ -453,10 +533,10 @@ export function Footer() {
               <span className="font-display text-xl">Sai Sannidhi</span>
             </div>
             <p className="mt-4 max-w-sm text-[13.5px] leading-relaxed text-ink-soft">
-              A devotee companion for the Shirdi Sai Baba temples of North America â€” aarti timings in your own
+              A devotee companion for the Shirdi Sai Baba temples of North America — aarti timings in your own
               time zone, seva booking, live darshan, annadanam and the Satcharitra, in one place.
             </p>
-            <p className="mt-5 font-quote text-lg italic text-gold-light">â€œWhy fear when I am here?â€</p>
+            <p className="mt-5 font-quote text-lg italic text-gold-light">“Why fear when I am here?”</p>
             <div className="mt-6 flex items-center gap-3 text-[12px] text-ink-faint">
               <span className="rounded-full border border-line px-3 py-1">501(c)(3) non-profit</span>
               <span className="rounded-full border border-line px-3 py-1">EIN 00-0000000</span>
@@ -507,7 +587,7 @@ export function Footer() {
               to="/contact"
               className="mt-5 inline-flex items-center gap-1.5 text-[13px] text-gold transition-colors hover:text-ember"
             >
-              Visiting for the first time? <span aria-hidden>â†’</span>
+              Visiting for the first time? <span aria-hidden>→</span>
             </Link>
           </div>
         </div>
@@ -515,10 +595,15 @@ export function Footer() {
         <Divider className="my-10" icon="dot" />
 
         <div className="flex flex-col items-center justify-between gap-4 text-[11.5px] text-ink-faint sm:flex-row">
-          <p>Â© {new Date().getFullYear()} Sai Sannidhi Temple Network. Mock data â€” no live transactions.</p>
+          <p>
+            © {new Date().getFullYear()} Sai Sannidhi Temple Network. Mock data — no live transactions ·{' '}
+            <Link to="/credits" className="text-gold transition-colors hover:text-ember">
+              Image credits
+            </Link>
+          </p>
           <p className="flex items-center gap-2">
-            Built with <Heart size={11} className="text-kumkum" /> in seva Â·{' '}
-            <span className="font-deva text-gold/70">à¤¸à¤¬à¤•à¤¾ à¤®à¤¾à¤²à¤¿à¤• à¤à¤•</span>
+            Built with <Heart size={11} className="text-kumkum" /> in seva ·{' '}
+            <span className="font-deva text-gold/70">सबका मालिक एक</span>
           </p>
         </div>
       </div>
@@ -582,7 +667,7 @@ export function BasketBar() {
         className="panel flex items-center justify-between gap-4 px-5 py-3.5"
       >
         <span className="text-[13px] text-ink-soft">
-          {cart.length} seva{cart.length > 1 ? 's' : ''} Â· <span className="text-gold-light">{usd(cartTotal)}</span>
+          {cart.length} seva{cart.length > 1 ? 's' : ''} · <span className="text-gold-light">{usd(cartTotal)}</span>
         </span>
         <span className="rounded-full bg-gradient-to-br from-ember-soft to-ember px-4 py-1.5 text-[12px] text-[#1a0d04]">
           Review

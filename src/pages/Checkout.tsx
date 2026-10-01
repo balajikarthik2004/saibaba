@@ -66,7 +66,7 @@ export default function Checkout() {
               </div>
 
               <div className="mt-10 flex flex-wrap justify-center gap-3">
-                <Button to="/account">View in My Seva</Button>
+                <Button to="/dashboard/sevas">View in My Seva</Button>
                 <Button to="/sevas" variant="outline">
                   Offer another seva
                 </Button>

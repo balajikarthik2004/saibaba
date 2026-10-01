@@ -99,6 +99,34 @@ for real temple imagery when the media library exists.
 
 ---
 
+## 2b. Photography
+
+All imagery is real, licensed photography fetched from **Wikimedia Commons** and verified to load before
+being written into `src/data/images.ts` (67 entries, each with `alt`, `credit`, `license` and `source`).
+
+- `src/components/Photo.tsx` renders every image with a shimmering skeleton while it decodes, a fade-in,
+  and a drawn SVG fallback (`ArtTile`) if the network is unavailable — a card is never blank or broken.
+- Pass `fill` for a background image; pass `ratio` for an inline one. **Do not pass `absolute inset-0`
+  via `className`** — Tailwind's `relative` on the component wins and the image collapses to no height.
+- `/credits` lists every photograph with its author and licence. The CC BY / CC BY-SA licences here
+  **require** that page stay reachable while these images are in use.
+- To swap in the temples' own photography: replace the `src` of each entry in `src/data/images.ts`.
+  Nothing else changes.
+
+## 2c. Development authentication & dashboard
+
+`/login` is a **development-only** sign-in: no server, no password check, no token. Any email plus a
+four-character password signs you in, and there are three one-click demo accounts (Devotee, Volunteer,
+Trustee). The session is a record in `localStorage`.
+
+- `/dashboard` is a sidebar app shell — devotee card, navigation, a live next-aarti widget and a temple
+  photo — with sections for Overview, My Sevas, Giving & Receipts, Parayan, Saved and Profile.
+- `RequireAuth` (exported from `src/pages/Login.tsx`) guards `/dashboard/*` and bounces to `/login`,
+  remembering where you were headed.
+- The old `/account` route now redirects into the dashboard.
+- **To make this real:** replace `signIn` in `src/lib/store.tsx` with an API call. Nothing else in the
+  app reads credentials.
+
 ## 3. Features
 
 **Worship** — Aarti timings & live countdown per temple · lyrics in Devanagari + transliteration +
@@ -115,12 +143,21 @@ lightbox and favourites.
 modal · teachings: Eleven Assurances, six guiding principles, life timeline, quote wall, Udi
 explainer · devotee experiences with submission form · first-visit guide, FAQ, contact form, directory.
 
-**Personal** — My Seva account (bookings, giving + tax receipts, parayan, saved photos, profile with
-gotra/nakshatra) · donations with 6 campaigns, progress bars and 501(c)(3) receipt generation.
+**Personal** — dev sign-in with three demo roles · sidebar dashboard (overview, sevas, giving + tax
+receipts, parayan, saved photos, profile with gotra/nakshatra) · donations with 6 campaigns, progress
+bars and 501(c)(3) receipt generation.
 
 **Cross-cutting** — global temple switcher (every timing follows it) · dark/light theme · 5 languages
 for nav and key labels (EN/HI/TE/TA/MR) · daily panchang widget · announcement ticker · toasts ·
 scroll reveals · `prefers-reduced-motion` respected · everything persisted to `localStorage`.
+
+## 3b. How this build was verified
+
+Driven in headless Chrome via `puppeteer-core`: all 18 public routes plus 6 dashboard routes loaded and
+screenshotted, in dark mode, light mode and at 390 px. Checked on every page: console errors, failed
+requests, broken images, horizontal overflow, and that an `h1` is present. Flows exercised end to end:
+`/dashboard` → `/login` redirect, demo sign-in → dashboard, `/account` → `/dashboard`, and seva booking
+(modal → basket → confirmation). Last run: no problems found.
 
 ---
 
@@ -128,11 +165,18 @@ scroll reveals · `prefers-reduced-motion` respected · everything persisted to 
 
 ```
 src/
-  data/        temples · sevas · events · satcharitra · community · aarti+panchang
+  data/        temples · sevas · events · satcharitra · community · aarti+panchang · images
   lib/         types · store (Context + localStorage) · utils (tz-aware time) · i18n
-  components/  Sacred (SVG art) · ui (design system) · Shell (header/footer) · AartiRing
-  pages/       18 routes, lazy-loaded except Home
+  components/  Sacred (SVG art) · Photo · ui (design system) · Shell (header/footer) · AartiRing
+  pages/       21 routes, lazy-loaded except Home; Dashboard holds its own nested routes
 ```
+
+### Encoding warning for Windows
+
+Source files are UTF-8 **without BOM** and contain Devanagari and typographic punctuation. Windows
+PowerShell 5.1's `Get-Content -Raw` decodes them as ANSI, so a `Get-Content | Set-Content` round-trip
+silently corrupts every non-ASCII character. Edit these files with an editor or Node, never with a
+PowerShell read-modify-write.
 
 State lives in one `AppProvider` (`src/lib/store.tsx`): selected temple, theme, language, seva basket,
 bookings, donations, parayan progress, favourites, profile, toasts. All of it persists to

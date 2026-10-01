@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import { cn } from '../lib/utils'
+import type { Photo as PhotoData } from '../data/images'
+import { Photo } from './Photo'
 import { Divider, Mandala } from './Sacred'
 
 /* ---------------- Buttons ---------------- */
@@ -92,12 +94,14 @@ export function SectionHeading({
   sub,
   align = 'center',
   action,
+  as: Tag = 'h2',
 }: {
   eyebrow?: string
   title: ReactNode
   sub?: ReactNode
   align?: 'center' | 'left'
   action?: ReactNode
+  as?: 'h1' | 'h2'
 }) {
   return (
     <div
@@ -110,7 +114,7 @@ export function SectionHeading({
         {eyebrow && (
           <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.42em] text-gold">{eyebrow}</p>
         )}
-        <h2 className="text-balance text-3xl leading-tight sm:text-4xl md:text-[2.7rem]">{title}</h2>
+        <Tag className="text-balance text-3xl leading-tight sm:text-4xl md:text-[2.7rem]">{title}</Tag>
         {sub && <p className="mt-4 text-pretty text-[15px] leading-relaxed text-ink-soft">{sub}</p>}
         {align === 'center' && <Divider className="mx-auto mt-7 max-w-xs" />}
       </div>
@@ -119,23 +123,41 @@ export function SectionHeading({
   )
 }
 
-/** Standard top-of-page banner with a slowly turning mandala behind it. */
+/**
+ * Standard top-of-page banner. Pass a photograph and it becomes a full-bleed
+ * hero; without one it falls back to the turning mandala.
+ */
 export function PageHeader({
   eyebrow,
   title,
   sub,
+  photo,
   children,
 }: {
   eyebrow: string
   title: string
   sub?: string
+  photo?: PhotoData
   children?: ReactNode
 }) {
   return (
-    <section className="relative overflow-hidden px-5 pb-10 pt-14 sm:px-8 sm:pt-20">
+    <section
+      className={cn(
+        'relative overflow-hidden px-5 pb-10 pt-14 sm:px-8 sm:pt-20',
+        photo && 'pb-16 sm:pb-20 sm:pt-28',
+      )}
+    >
+      {photo ? (
+        <>
+          <Photo photo={photo} fill priority fallbackSeed={title.length} />
+          {/* Readable over the photograph, fading into the page below it. */}
+          <div className="absolute inset-0 bg-gradient-to-br from-bg/75 via-bg/82 to-bg/94" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg to-transparent" />
+        </>
+      ) : null}
       <Mandala className="pointer-events-none absolute -right-40 -top-44 size-[520px] opacity-[0.14] animate-slow-spin" />
       <div className="relative mx-auto max-w-[1400px]">
-        <SectionHeading align="left" eyebrow={eyebrow} title={title} sub={sub} action={children} />
+        <SectionHeading as="h1" align="left" eyebrow={eyebrow} title={title} sub={sub} action={children} />
         <Divider className="max-w-xl" />
       </div>
     </section>

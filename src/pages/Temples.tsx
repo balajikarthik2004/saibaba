@@ -4,7 +4,9 @@ import { ArrowRight, Check, MapPin, Navigation, Radio, Search } from 'lucide-rea
 import { regions, temples } from '../data/temples'
 import { useApp } from '../lib/store'
 import { clockIn, cn, to12h, useReveal } from '../lib/utils'
-import { ArtTile, Mandala } from '../components/Sacred'
+import { Mandala } from '../components/Sacred'
+import { Photo } from '../components/Photo'
+import { fromPool, photos } from '../data/images'
 import { Badge, Button, Chip, Input, PageHeader, Panel, Section, Stat } from '../components/ui'
 
 export default function Temples() {
@@ -45,6 +47,7 @@ export default function Temples() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.templeTower}
         eyebrow="The network"
         title="Ten sannidhis, one Dhuni"
         sub="Every temple keeps the same four aartis and the same open kitchen, in its own time zone. Choose yours and the whole site follows you."
@@ -125,9 +128,13 @@ export default function Temples() {
                 hover
                 className={cn('reveal flex flex-col', active && 'border-[var(--c-line-strong)]')}
               >
-                <div className="relative h-40 overflow-hidden">
-                  <ArtTile seed={i + 1} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/25 to-transparent" />
+                <Photo
+                  photo={fromPool('temples', i)}
+                  className="h-44 w-full"
+                  fallbackSeed={i + 1}
+                  imgClassName="transition-transform duration-700 group-hover:scale-105"
+                  scrim
+                >
                   <div className="absolute left-5 top-5 flex gap-2">
                     <Badge>{t.region}</Badge>
                     {t.liveDarshan && (
@@ -140,7 +147,7 @@ export default function Temples() {
                     <p className="font-display text-lg text-ink">{clockIn(t.timezone)}</p>
                     <p className="text-[10px] uppercase tracking-[0.2em] text-gold">{t.tzLabel}</p>
                   </div>
-                </div>
+                </Photo>
 
                 <div className="flex flex-1 flex-col px-6 pb-6 pt-2">
                   <h3 className="text-balance text-[19px] leading-snug">{t.name}</h3>

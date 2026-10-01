@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Bell, Maximize2, Radio, Send, Volume2 } from 'lucide-react'
 import { temples } from '../data/temples'
@@ -6,13 +6,14 @@ import { useApp } from '../lib/store'
 import { aartiStatus, clockIn, cn, to12h, useReveal, useTick } from '../lib/utils'
 import { BabaSilhouette, Divider, EmberField, Mandala, OmMark } from '../components/Sacred'
 import { Badge, Button, Input, PageHeader, Panel, Section } from '../components/ui'
+import { photos } from '../data/images'
 
 const seedChat = [
-  { who: 'Anitha, Fremont CA', msg: 'Om Sai Ram from California ðŸ™' },
+  { who: 'Anitha, Fremont CA', msg: 'Om Sai Ram from California 🙏' },
   { who: 'Ramesh, Edison NJ', msg: 'Watching with my mother, she cannot travel any more. Thank you for this.' },
-  { who: 'Sandhya, Toronto', msg: 'Om Sai Ram ðŸª”' },
+  { who: 'Sandhya, Toronto', msg: 'Om Sai Ram 🪔' },
   { who: 'Deepak, Plano TX', msg: 'The Udi reached us yesterday. Grateful.' },
-  { who: 'Meena, Seattle WA', msg: 'Shraddha and Saburi ðŸ™' },
+  { who: 'Meena, Seattle WA', msg: 'Shraddha and Saburi 🙏' },
 ]
 
 export default function Darshan() {
@@ -48,6 +49,7 @@ export default function Darshan() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.babaPrasadalaya}
         eyebrow="Live darshan"
         title="Darshan, wherever you are"
         sub="Eight sannidhis stream all four aartis. For devotees who are housebound, travelling, or a thousand miles from the nearest temple."
@@ -63,7 +65,7 @@ export default function Darshan() {
               <div className="absolute inset-0 grid place-items-center">
                 <div className="text-center">
                   <BabaSilhouette className="mx-auto w-[min(42vw,210px)] opacity-90" />
-                  <p className="mt-4 font-deva text-[15px] text-gold">à¥ à¤¸à¤¾à¤ˆà¤‚ à¤°à¤¾à¤®</p>
+                  <p className="mt-4 font-deva text-[15px] text-gold">ॐ साईं राम</p>
                   <p className="mt-2 text-[13px] text-ink-soft">
                     {streaming
                       ? status.live
@@ -72,7 +74,7 @@ export default function Darshan() {
                       : `${temple.shortName} does not stream yet`}
                   </p>
                   <p className="mt-3 text-[11.5px] text-ink-faint">
-                    Video player is mocked in this build â€” the real stream drops in here.
+                    Video player is mocked in this build — the real stream drops in here.
                   </p>
                 </div>
               </div>
@@ -103,7 +105,7 @@ export default function Darshan() {
                 <div>
                   <h2 className="font-display text-2xl">{temple.name}</h2>
                   <p className="mt-1.5 text-[12.5px] text-ink-faint">
-                    {temple.city}, {temple.state} Â· {clockIn(temple.timezone)} {temple.tzLabel}
+                    {temple.city}, {temple.state} · {clockIn(temple.timezone)} {temple.tzLabel}
                   </p>
                 </div>
                 <Button to={`/temples/${temple.id}`} variant="ghost" size="sm">
@@ -113,7 +115,7 @@ export default function Darshan() {
 
               <Divider className="my-6" icon="dot" />
 
-              <p className="text-[10px] uppercase tracking-[0.3em] text-gold">Todayâ€™s stream schedule</p>
+              <p className="text-[10px] uppercase tracking-[0.3em] text-gold">Today’s stream schedule</p>
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
                 {temple.aartis.map((a) => {
                   const key = `${temple.id}-${a.key}`
@@ -201,7 +203,7 @@ export default function Darshan() {
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && send()}
-                  placeholder="Om Sai Ramâ€¦"
+                  placeholder="Om Sai Ram…"
                 />
                 <Button onClick={send} size="sm" className="shrink-0">
                   <Send size={14} />
@@ -216,7 +218,7 @@ export default function Darshan() {
         <Panel className="reveal flex flex-col items-center gap-5 px-8 py-12 text-center">
           <OmMark size={30} className="text-gold" />
           <h2 className="max-w-2xl text-balance text-3xl leading-tight">
-            Two sannidhis still need a stream â€” and a volunteer to run it.
+            Two sannidhis still need a stream — and a volunteer to run it.
           </h2>
           <p className="max-w-xl text-[14.5px] leading-relaxed text-ink-soft">
             Seattle and South Florida have the cameras but not the hands. If you can run OBS and an audio desk for

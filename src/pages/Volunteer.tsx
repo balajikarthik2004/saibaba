@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { Check, Users, X } from 'lucide-react'
 import { volunteerRoles } from '../data/community'
 import { temples } from '../data/temples'
@@ -7,6 +7,7 @@ import type { VolunteerRole } from '../lib/types'
 import { cn, useReveal } from '../lib/utils'
 import { Divider, EmberField, Mandala } from '../components/Sacred'
 import { Badge, Button, Field, Input, PageHeader, Panel, Progress, Section, SectionHeading, Select, Stat, Textarea } from '../components/ui'
+import { photos } from '../data/images'
 
 export default function Volunteer() {
   const { notify, profile } = useApp()
@@ -17,9 +18,10 @@ export default function Volunteer() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.kitchenMen}
         eyebrow="Seva"
         title="He swept the floor Himself"
-        sub="Baba ground wheat, tended lamps, nursed the sick and cooked for the village. Nothing in a temple runs without hands â€” here is where yours fit."
+        sub="Baba ground wheat, tended lamps, nursed the sick and cooked for the village. Nothing in a temple runs without hands — here is where yours fit."
       />
 
       <Section wide className="pt-0">
@@ -114,10 +116,10 @@ export default function Volunteer() {
             <p className="text-[10px] uppercase tracking-[0.3em] text-gold">What volunteers tell us</p>
             <Divider className="my-6 max-w-[180px]" icon="dot" />
             <blockquote className="font-quote text-[19px] italic leading-relaxed text-ink">
-              â€œI signed up because I wanted to feel useful, and I was given the least interesting job in the
-              building. By the end of it I had not thought about my job once.â€
+              “I signed up because I wanted to feel useful, and I was given the least interesting job in the
+              building. By the end of it I had not thought about my job once.”
             </blockquote>
-            <p className="mt-5 text-[12.5px] text-ink-faint">Priya N. Â· Suwanee, GA Â· Kitchen team</p>
+            <p className="mt-5 text-[12.5px] text-ink-faint">Priya N. · Suwanee, GA · Kitchen team</p>
           </div>
         </Panel>
       </Section>

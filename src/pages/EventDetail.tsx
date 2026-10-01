@@ -5,7 +5,9 @@ import { eventById, events } from '../data/events'
 import { temples } from '../data/temples'
 import { useApp } from '../lib/store'
 import { fmtDateLong, fmtDayMonth, relativeDay, useReveal } from '../lib/utils'
-import { ArtTile, Divider, EmberField, Mandala } from '../components/Sacred'
+import { Divider, EmberField, Mandala } from '../components/Sacred'
+import { Photo } from '../components/Photo'
+import { fromPool } from '../data/images'
 import { Badge, Button, Field, Input, Panel, Progress, Section, Select } from '../components/ui'
 
 export default function EventDetail() {
@@ -53,9 +55,14 @@ export default function EventDetail() {
   return (
     <div ref={ref}>
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 h-[360px]">
-          <ArtTile seed={e.title.length} />
-          <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/75 to-bg/35" />
+        <div className="absolute inset-0 h-[420px]">
+          <Photo
+            photo={fromPool('festivals', e.title.length)}
+            fill
+            priority
+            fallbackSeed={e.title.length}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-bg/40" />
         </div>
         <EmberField count={18} />
 
@@ -148,7 +155,7 @@ export default function EventDetail() {
                       {temples.find((t) => t.id === templeId)?.shortName}. Come a little early — the hospitality
                       desk will be looking for your name.
                     </p>
-                    <Button to="/account" variant="ghost" size="sm" className="mt-6">
+                    <Button to="/dashboard/sevas" variant="ghost" size="sm" className="mt-6">
                       See it in My Seva
                     </Button>
                   </div>
@@ -235,10 +242,13 @@ export default function EventDetail() {
           <div className="grid gap-5 sm:grid-cols-3">
             {related.map((r, i) => (
               <Link key={r.id} to={`/events/${r.id}`} className="reveal group panel overflow-hidden">
-                <div className="relative h-32 overflow-hidden">
-                  <ArtTile seed={i + 9} className="transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent" />
-                </div>
+                <Photo
+                  photo={fromPool('festivals', i + 3)}
+                  className="h-32 w-full"
+                  fallbackSeed={i + 9}
+                  imgClassName="transition-transform duration-700 group-hover:scale-105"
+                  scrim
+                />
                 <div className="px-6 pb-6 pt-2">
                   <p className="text-[11px] uppercase tracking-[0.2em] text-gold">{fmtDayMonth(r.date)}</p>
                   <p className="mt-1.5 text-balance text-[16px] leading-snug">{r.title}</p>

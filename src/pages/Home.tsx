@@ -29,7 +29,9 @@ import {
   weekdayIn,
 } from '../lib/utils'
 import { AartiRing } from '../components/AartiRing'
-import { ArtTile, BabaSilhouette, Divider, EmberField, Mandala, TempleArch } from '../components/Sacred'
+import { Photo } from '../components/Photo'
+import { fromPool, photos } from '../data/images'
+import { Divider, EmberField, Mandala, TempleArch } from '../components/Sacred'
 import { Badge, Button, Chip, Panel, Progress, Section, SectionHeading, Stat } from '../components/ui'
 
 export default function Home() {
@@ -54,6 +56,11 @@ export default function Home() {
     <div ref={ref}>
       {/* ============ HERO ============ */}
       <section className="relative overflow-hidden px-5 pb-20 pt-10 sm:px-8 sm:pt-16">
+        {/* Photograph behind the hero, veiled so the type stays readable. */}
+        <Photo photo={photos.templeNight} fill className="z-0" priority fallbackSeed={2} />
+        <div className="absolute inset-0 z-0 bg-gradient-to-br from-bg via-bg/90 to-bg/62" />
+        {/* Fade the photograph out at the foot so the hero meets the page cleanly. */}
+        <div className="absolute inset-x-0 bottom-0 z-0 h-48 bg-gradient-to-t from-bg to-transparent" />
         <EmberField count={30} className="z-0" />
         <Mandala className="pointer-events-none absolute -right-40 -top-28 z-0 size-[640px] opacity-[0.22] animate-slow-spin" />
         <Mandala
@@ -101,17 +108,27 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="relative grid place-items-center">
-            <div className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(circle_at_50%_45%,color-mix(in_srgb,var(--c-ember)_26%,transparent),transparent_62%)] blur-2xl" />
-            <BabaSilhouette className="w-[min(78vw,330px)] drop-shadow-[0_24px_60px_rgba(249,115,22,0.3)]" />
-            <div className="panel mt-[-36px] w-[min(92vw,330px)] px-6 py-6 text-center">
-              <AartiRing temple={temple} size={200} />
-              <Divider className="my-4" icon="dot" />
-              <p className="text-[11px] uppercase tracking-[0.22em] text-ink-faint">{temple.shortName}</p>
-              <p className="mt-1 text-[12.5px] text-ink-soft">
-                Local time {clockIn(temple.timezone)} {temple.tzLabel}
-              </p>
-            </div>
+          <div className="relative mx-auto w-[min(92vw,380px)]">
+            <div className="absolute -inset-6 -z-10 rounded-[40px] bg-[radial-gradient(circle_at_50%_40%,color-mix(in_srgb,var(--c-ember)_22%,transparent),transparent_66%)] blur-2xl" />
+            <Panel className="overflow-hidden">
+              <Photo photo={photos.babaShrine} ratio="4/5" className="w-full" priority fallbackSeed={1}>
+                <span className="absolute inset-x-0 top-0 bg-gradient-to-b from-bg-deep via-bg-deep/85 to-transparent px-5 pb-14 pt-5">
+                  <span className="block font-deva text-[12px] text-gold">श्री साईनाथ महाराज</span>
+                  <span className="mt-0.5 block font-display text-lg leading-tight text-ink">
+                    {temple.shortName}
+                  </span>
+                  <span className="mt-0.5 block text-[11.5px] text-ink-soft">
+                    {clockIn(temple.timezone)} {temple.tzLabel} · {temple.city}, {temple.stateCode}
+                  </span>
+                </span>
+                {/* Scrim only at the foot, where the aarti card sits. */}
+                <span className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-bg via-bg/70 to-transparent" />
+              </Photo>
+            </Panel>
+
+            <Panel className="elevated relative z-10 mx-auto -mt-32 w-[min(80vw,262px)] px-5 py-5 text-center">
+              <AartiRing temple={temple} size={176} />
+            </Panel>
           </div>
         </div>
       </section>
@@ -235,14 +252,18 @@ export default function Home() {
               className="reveal group panel overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_34px_80px_-36px_var(--c-ember)]"
               style={{ transitionDelay: `${i * 90}ms` }}
             >
-              <div className="relative h-44 overflow-hidden">
-                <ArtTile seed={i * 3 + 2} className="transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/30 to-transparent" />
+              <Photo
+                photo={fromPool('festivals', i)}
+                className="h-44 w-full"
+                fallbackSeed={i * 3 + 2}
+                imgClassName="transition-transform duration-700 group-hover:scale-105"
+                scrim
+              >
                 <div className="absolute left-5 top-5 flex gap-2">
                   <Badge tone="ember">{e.category}</Badge>
                   <Badge>{relativeDay(e.date)}</Badge>
                 </div>
-              </div>
+              </Photo>
               <div className="px-6 pb-6 pt-1">
                 <p className="text-[11px] uppercase tracking-[0.2em] text-gold">
                   {fmtDayMonth(e.date)}
@@ -449,6 +470,8 @@ export default function Home() {
       {/* ============ CLOSING CTA ============ */}
       <Section wide className="pb-24">
         <Panel className="reveal relative overflow-hidden px-8 py-16 text-center sm:px-16">
+          <Photo photo={photos.dhuniFire} fill fallbackSeed={3} />
+          <div className="absolute inset-0 bg-gradient-to-b from-surface/95 via-surface/90 to-surface/96" />
           <EmberField count={16} />
           <Mandala className="pointer-events-none absolute left-1/2 top-1/2 size-[520px] -translate-x-1/2 -translate-y-1/2 opacity-[0.12] animate-reverse-spin" />
           <div className="relative z-10 mx-auto max-w-2xl">
@@ -491,39 +514,55 @@ function TempleMini({ id, index }: { id: string; index: number }) {
   return (
     <div
       className={cn(
-        'reveal group panel flex flex-col px-5 py-5 transition-all duration-500 hover:-translate-y-1',
+        'reveal group panel flex flex-col overflow-hidden transition-all duration-500 hover:-translate-y-1',
         active && 'border-[var(--c-line-strong)] shadow-[0_26px_60px_-34px_var(--c-ember)]',
       )}
       style={{ transitionDelay: `${index * 45}ms` }}
     >
-      <div className="flex items-start justify-between gap-2">
+      <Photo
+        photo={fromPool('temples', index)}
+        ratio="16/10"
+        className="w-full"
+        fallbackSeed={index + 1}
+        imgClassName="transition-transform duration-700 group-hover:scale-105"
+        scrim
+      >
+        {x.liveDarshan && (
+          <span className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full border border-line-strong bg-bg-deep/70 px-2.5 py-1 text-[10px] text-ember backdrop-blur">
+            <span className="size-1.5 animate-pulse rounded-full bg-ember" /> Live
+          </span>
+        )}
+      </Photo>
+
+      <div className="flex flex-1 flex-col px-5 pb-5 pt-3">
         <span className="font-display text-[15px] leading-tight text-ink">{x.shortName}</span>
-        {x.liveDarshan && <span className="mt-1 size-1.5 shrink-0 animate-pulse rounded-full bg-ember" />}
-      </div>
-      <p className="mt-1 text-[11.5px] text-ink-faint">
-        {x.city}, {x.stateCode}
-      </p>
-      <p className="mt-3 text-[12px] text-gold-light/85">{clockIn(x.timezone)} {x.tzLabel}</p>
-      <p className="mt-0.5 text-[11px] text-ink-faint">Kakad {to12h(x.aartis[0].time)}</p>
-      <div className="mt-4 flex gap-2">
-        <button
-          onClick={() => setTempleId(x.id)}
-          className={cn(
-            'flex-1 rounded-full border px-3 py-1.5 text-[11.5px] transition-colors',
-            active
-              ? 'border-ember/50 bg-ember/15 text-ember-soft'
-              : 'border-line text-ink-soft hover:border-line-strong hover:text-ink',
-          )}
-        >
-          {active ? 'Your sannidhi' : 'Choose'}
-        </button>
-        <Link
-          to={`/temples/${x.id}`}
-          className="grid size-7 place-items-center rounded-full border border-line text-ink-soft transition-colors hover:border-line-strong hover:text-ink"
-          aria-label={`About ${x.shortName}`}
-        >
-          <ArrowRight size={12} />
-        </Link>
+        <p className="mt-1 text-[11.5px] text-ink-faint">
+          {x.city}, {x.stateCode}
+        </p>
+        <p className="mt-3 text-[12px] text-gold-light/85">
+          {clockIn(x.timezone)} {x.tzLabel}
+        </p>
+        <p className="mt-0.5 text-[11px] text-ink-faint">Kakad {to12h(x.aartis[0].time)}</p>
+        <div className="mt-4 flex gap-2">
+          <button
+            onClick={() => setTempleId(x.id)}
+            className={cn(
+              'flex-1 rounded-full border px-3 py-1.5 text-[11.5px] transition-colors',
+              active
+                ? 'border-ember/50 bg-ember/15 text-ember-soft'
+                : 'border-line text-ink-soft hover:border-line-strong hover:text-ink',
+            )}
+          >
+            {active ? 'Your sannidhi' : 'Choose'}
+          </button>
+          <Link
+            to={`/temples/${x.id}`}
+            className="grid size-7 place-items-center rounded-full border border-line text-ink-soft transition-colors hover:border-line-strong hover:text-ink"
+            aria-label={`About ${x.shortName}`}
+          >
+            <ArrowRight size={12} />
+          </Link>
+        </div>
       </div>
     </div>
   )

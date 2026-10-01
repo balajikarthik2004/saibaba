@@ -1,0 +1,508 @@
+/**
+ * Photography library.
+ *
+ * Every URL here was fetched from Wikimedia Commons and verified to return a
+ * real image before being written into this file. Each entry carries its
+ * licence and author so the credits page can attribute it properly.
+ *
+ * To swap in the temple's own photography, replace the `src` of each entry —
+ * nothing else in the app needs to change.
+ */
+
+export interface Photo {
+  src: string
+  alt: string
+  credit: string
+  license: string
+  source: string
+}
+
+export const photos = {
+  babaShrine: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Sai_Baba_at_Sai_mandir.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'Sai Baba enshrined in a temple sanctum, garlanded and dressed in saffron',
+    credit: 'Tom1cruz',
+    license: 'CC0',
+    source: 'https://commons.wikimedia.org/wiki/File:Sai_Baba_at_Sai_mandir.jpg',
+  },
+  babaStatue: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Sai_Baba_statue.jpg/1920px-Sai_Baba_statue.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Marble murti of Shirdi Sai Baba seated with His right leg crossed over the left',
+    credit: 'Srikanth Pochiraju',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Sai_Baba_statue.jpg',
+  },
+  babaStatueAlt: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Statue_of_a_Shirdi_Sai_Baba.jpg/1920px-Statue_of_a_Shirdi_Sai_Baba.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Statue of Shirdi Sai Baba in a temple niche',
+    credit: 'Oleg Yunakov',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Statue_of_a_Shirdi_Sai_Baba.jpg',
+  },
+  babaPrasadalaya: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Shirdi_Sai_baba_Statue_at_Shri_Saibaba_Prasadalaya%2C_Shirdi%2C_Maharastra_%281%29.jpg/1920px-Shirdi_Sai_baba_Statue_at_Shri_Saibaba_Prasadalaya%2C_Shirdi%2C_Maharastra_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Sai Baba murti at the Shri Saibaba Prasadalaya in Shirdi',
+    credit: 'K.Venkataramana',
+    license: 'CC0',
+    source: 'https://commons.wikimedia.org/wiki/File:Shirdi_Sai_baba_Statue_at_Shri_Saibaba_Prasadalaya,_Shirdi,_Maharastra_(1).jpg',
+  },
+  babaShirdi: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/Shirdi_Sai_Statue_at_Shirdi%2C_Maharastra_%282%29.jpg/1920px-Shirdi_Sai_Statue_at_Shirdi%2C_Maharastra_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Sai Baba statue at Shirdi, Maharashtra',
+    credit: 'K.Venkataramana',
+    license: 'CC0',
+    source: 'https://commons.wikimedia.org/wiki/File:Shirdi_Sai_Statue_at_Shirdi,_Maharastra_(2).jpg',
+  },
+  babaPortrait: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Shirdi_Sai_Baba.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'Photographic portrait of Sai Baba of Shirdi',
+    credit: 'Photographer in Shirdi, India',
+    license: 'Public domain',
+    source: 'https://commons.wikimedia.org/wiki/File:Shirdi_Sai_Baba.jpg',
+  },
+  babaSeated: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/e/e3/Shirdi_Sai_Baba_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'Sai Baba of Shirdi seated on a stone',
+    credit: 'Photographer in Shirdi, India',
+    license: 'Public domain',
+    source: 'https://commons.wikimedia.org/wiki/File:Shirdi_Sai_Baba_2.jpg',
+  },
+  babaDwarkamai: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/d/df/Shirdi_Sai_Baba_4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'Sai Baba of Shirdi in Dwarkamai',
+    credit: 'Tripathysoham',
+    license: 'CC BY-SA 3.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Shirdi_Sai_Baba_4.jpg',
+  },
+  samadhiMandir: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/8/8d/Shirdi_Sai_Baba_Samadhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'The Samadhi Mandir at Shirdi where Baba was laid to rest',
+    credit: 'Prime Minister\'s Office',
+    license: 'GODL-India',
+    source: 'https://commons.wikimedia.org/wiki/File:Shirdi_Sai_Baba_Samadhi.jpg',
+  },
+  chavadi: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Chawadi_in_Shirdi.jpg/1920px-Chawadi_in_Shirdi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'The Chavadi at Shirdi, where Baba slept on alternate nights',
+    credit: 'कृष्ण कान्त शर्मा',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Chawadi_in_Shirdi.jpg',
+  },
+  usTempleA: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Shirdi_Sai_Temple_in_Inverness_Highlands_South%2C_Florida%2C_US_04.jpg/1920px-Shirdi_Sai_Temple_in_Inverness_Highlands_South%2C_Florida%2C_US_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Shirdi Sai temple in Florida, United States',
+    credit: 'Shirdi Sai',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Shirdi_Sai_Temple_in_Inverness_Highlands_South,_Florida,_US_04.jpg',
+  },
+  usTempleB: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Shirdi_Sai_Temple_in_Inverness_Highlands_South%2C_Florida%2C_US_06.jpg/1920px-Shirdi_Sai_Temple_in_Inverness_Highlands_South%2C_Florida%2C_US_06.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Shirdi Sai temple grounds in Florida, United States',
+    credit: 'Shirdi Sai',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Shirdi_Sai_Temple_in_Inverness_Highlands_South,_Florida,_US_06.jpg',
+  },
+  usTempleC: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Shirdi_Sai_Temple_in_Inverness_Highlands_South%2C_Florida%2C_US_07.jpg/1920px-Shirdi_Sai_Temple_in_Inverness_Highlands_South%2C_Florida%2C_US_07.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Shirdi Sai temple entrance in Florida, United States',
+    credit: 'Shirdi Sai',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Shirdi_Sai_Temple_in_Inverness_Highlands_South,_Florida,_US_07.jpg',
+  },
+  usTempleD: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Shirdi_Sai_Temple_in_Inverness_Highlands_South%2C_Florida%2C_US_11.jpg/1920px-Shirdi_Sai_Temple_in_Inverness_Highlands_South%2C_Florida%2C_US_11.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Shirdi Sai temple shrine in Florida, United States',
+    credit: 'Shirdi Sai',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Shirdi_Sai_Temple_in_Inverness_Highlands_South,_Florida,_US_11.jpg',
+  },
+  usMandirA: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/e/e5/BAPS_Chicago_Mandir_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'A Hindu mandir in Chicago, Illinois',
+    credit: 'Work for hire; Copyright held by BAPS Swaminarayan Sanstha (web: www.baps.org, email: info@baps.org); Unknown photograph',
+    license: 'CC BY-SA 3.0',
+    source: 'https://commons.wikimedia.org/wiki/File:BAPS_Chicago_Mandir_1.jpg',
+  },
+  usMandirB: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/0/07/BAPS_Chicago_Mandir_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'Carved stone mandir in Chicago, Illinois',
+    credit: 'Work for hire; Copyright held by BAPS Swaminarayan Sanstha (web: www.baps.org, email: info@baps.org); Unknown photograph',
+    license: 'CC BY-SA 3.0',
+    source: 'https://commons.wikimedia.org/wiki/File:BAPS_Chicago_Mandir_2.jpg',
+  },
+  templeBengaluru: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Sai_Baba_Temple%2C_Munnekollala%2C_Bengaluru.jpg/1920px-Sai_Baba_Temple%2C_Munnekollala%2C_Bengaluru.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Sai Baba temple at Munnekollala, Bengaluru',
+    credit: 'Mallikarjunasj',
+    license: 'CC0',
+    source: 'https://commons.wikimedia.org/wiki/File:Sai_Baba_Temple,_Munnekollala,_Bengaluru.jpg',
+  },
+  templeTower: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/b/b6/%2824%29_Vellai_Gopuram_of_Hindu_temple_Sri_Ranganathaswamy_Srirangam_Thiruvarangam_Tiruchirapalli_India_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'The white gopuram of a south Indian temple against a clear sky',
+    credit: 'Jean-Pierre Dalbéra',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:(24)_Vellai_Gopuram_of_Hindu_temple_Sri_Ranganathaswamy_Srirangam_Thiruvarangam_Tiruchirapalli_India_2014.jpg',
+  },
+  templeStone: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/4/45/%2818%29_Hindu_temple_Chola_dynasty_Brihadishwara_Periya_Kovil_Brihadeeswara_RajaRajeswara_Tanjore_Tamil_Nadu_India_2014.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'Chola-period stone temple architecture at Thanjavur',
+    credit: 'Jean-Pierre Dalbéra',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:(18)_Hindu_temple_Chola_dynasty_Brihadishwara_Periya_Kovil_Brihadeeswara_RajaRajeswara_Tanjore_Tamil_Nadu_India_2014.jpg',
+  },
+  templeFacade: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/A_Hindu_Temple_architecture_religion_in_India.jpg/1920px-A_Hindu_Temple_architecture_religion_in_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Carved facade of a Hindu temple in India',
+    credit: 'Nithi Anand from Paris, France',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:A_Hindu_Temple_architecture_religion_in_India.jpg',
+  },
+  templeCarved: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/An_11th_century_Hindu_temple_architecture_in_south_India.jpg/1920px-An_11th_century_Hindu_temple_architecture_in_south_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Eleventh-century carved temple architecture in south India',
+    credit: 'Nithi Anand from Paris, France',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:An_11th_century_Hindu_temple_architecture_in_south_India.jpg',
+  },
+  templeGopuram: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Belur%2C_Chennakeshava_Temple%2C_gopuram_%289882147265%29.jpg/1920px-Belur%2C_Chennakeshava_Temple%2C_gopuram_%289882147265%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Sculpted gopuram of the Chennakeshava temple at Belur',
+    credit: 'Arian Zwegers from Brussels, Belgium',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Belur,_Chennakeshava_Temple,_gopuram_(9882147265).jpg',
+  },
+  templeChennai: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/A_Hindu_temple_gopuram_in_Chennai_India.jpg/1920px-A_Hindu_temple_gopuram_in_Chennai_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A brightly painted temple gopuram in Chennai',
+    credit: 'Johann-Nikolaus Andreae from Hamburg, Germany',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:A_Hindu_temple_gopuram_in_Chennai_India.jpg',
+  },
+  mandapam: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/11th_12th-century_Pachala_Someshwara_Temple_shared_Mandapam_with_pillars.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'Pillared mandapam inside a stone temple',
+    credit: 'P. Madhusudan',
+    license: 'CC0',
+    source: 'https://commons.wikimedia.org/wiki/File:11th_12th-century_Pachala_Someshwara_Temple_shared_Mandapam_with_pillars.jpg',
+  },
+  mandapamNandi: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/e/eb/11th_12th-century_Pachala_Someshwara_Temple_Mandapam_with_Nandi_and_yajna%2C_Panagal%2C_Telangana%2C_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'Temple mandapam with pillars and a Nandi shrine',
+    credit: 'P. Madhusudan',
+    license: 'CC0',
+    source: 'https://commons.wikimedia.org/wiki/File:11th_12th-century_Pachala_Someshwara_Temple_Mandapam_with_Nandi_and_yajna,_Panagal,_Telangana,_India.jpg',
+  },
+  aartiThali: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/4/43/%281%29_Aarti_Thali%2C_Prayer_Plate_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'An aarti thali with a lit lamp, kumkum and flowers',
+    credit: 'Pramal',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:(1)_Aarti_Thali,_Prayer_Plate_India.jpg',
+  },
+  aartiLamp: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Aarti_Arati_Lamp_for_Puja%2C_Prayers_Hinduism.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'A brass aarti lamp lit for puja',
+    credit: 'Hari Prasad Nadig',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Aarti_Arati_Lamp_for_Puja,_Prayers_Hinduism.jpg',
+  },
+  diyaRow: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Diwali_candles.jpg/1920px-Diwali_candles.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A row of oil lamps burning in the dark',
+    credit: 'Ramakrishna Reddy y from Pune, India',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Diwali_candles.jpg',
+  },
+  diyaLamps: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Diwali_Lamps.jpg/1920px-Diwali_Lamps.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Clay diyas arranged and lit for the festival of lights',
+    credit: 'Ashwini Sukhdeve',
+    license: 'CC BY-SA 3.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Diwali_Lamps.jpg',
+  },
+  diyaLedge: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Diya_on_a_balcony_ledge.jpg/1920px-Diya_on_a_balcony_ledge.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A single clay diya burning on a ledge',
+    credit: 'siddarth varanasi',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Diya_on_a_balcony_ledge.jpg',
+  },
+  dhuniFire: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/%28A%29_puja_fire%2C_Havanam.jpg/1920px-%28A%29_puja_fire%2C_Havanam.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'The sacred fire of a havan burning in a kunda',
+    credit: 'Ravigopal Kesari',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:(A)_puja_fire,_Havanam.jpg',
+  },
+  havanRitual: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/%28A%29_Hindu_puja%2C_yajna%2C_yagna%2C_Havanam_in_progress.jpg/1920px-%28A%29_Hindu_puja%2C_yajna%2C_yagna%2C_Havanam_in_progress.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A yajna in progress, offerings made into the fire',
+    credit: 'Bharat Mudgal',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:(A)_Hindu_puja,_yajna,_yagna,_Havanam_in_progress.jpg',
+  },
+  templeNight: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/b/bb/Ujjain_Shree_Harsiddhi_Mata_Shaktipeeth_at_Night_%E2%80%93_Sep_2025.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'A temple illuminated with lamps at night',
+    credit: 'Rajveer Bairagi',
+    license: 'CC BY 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Ujjain_Shree_Harsiddhi_Mata_Shaktipeeth_at_Night_%E2%80%93_Sep_2025.jpg',
+  },
+  pandalNight: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Lord_Ganesh_Pandal.jpg/1920px-Lord_Ganesh_Pandal.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A festival pandal lit up at night',
+    credit: 'Sudhiksha v',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Lord_Ganesh_Pandal.jpg',
+  },
+  marigoldGarland: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Marigold_Flowers_as_garland.jpg/1920px-Marigold_Flowers_as_garland.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Marigold flowers strung into a garland',
+    credit: 'SnapMeUp',
+    license: 'CC BY 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Marigold_Flowers_as_garland.jpg',
+  },
+  marigoldHeap: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Marigold_Flowers_as_garland_in_India.jpg/1920px-Marigold_Flowers_as_garland_in_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Heaped marigold garlands at a flower market in India',
+    credit: 'SnapMeUp',
+    license: 'CC BY 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Marigold_Flowers_as_garland_in_India.jpg',
+  },
+  shrineOfferings: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/DFC_2067_A_brightly_decorated_outdoor_shrine_framed_by_a_darkened_market_stall_window_with_marigold_garlands_offerings_and_small_animal_statues_bathed_in_soft_daylight.jpg/1920px-thumbnail.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A decorated shrine framed by marigold garlands and offerings',
+    credit: 'PattayaPatrol',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:DFC_2067_A_brightly_decorated_outdoor_shrine_framed_by_a_darkened_market_stall_window_with_marigold_garlands_offerings_and_small_animal_statues_bathed_in_soft_daylight.jpg',
+  },
+  templeBell: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/84/Brass_Temple_Bell_%2824275541%29.jpeg/1920px-Brass_Temple_Bell_%2824275541%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A brass temple bell',
+    credit: 'Ravi Kumar',
+    license: 'CC BY 3.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Brass_Temple_Bell_(24275541).jpeg',
+  },
+  templeBellTall: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Bhuleshwar_Brass_Bell.jpg/1920px-Bhuleshwar_Brass_Bell.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A large brass temple bell hanging in a mandir',
+    credit: 'Rohan Kalbhor',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Bhuleshwar_Brass_Bell.jpg',
+  },
+  langarServing: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Langar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'A community kitchen meal served free to everyone who comes',
+    credit: 'Harisingh at en.wikipedia',
+    license: 'CC BY-SA 3.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Langar.jpg',
+  },
+  langarPrep: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Preparing_langar.jpg/1920px-Preparing_langar.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Volunteers preparing a community meal in enormous pots',
+    credit: 'User:Vrlobo888',
+    license: 'Public domain',
+    source: 'https://commons.wikimedia.org/wiki/File:Preparing_langar.jpg',
+  },
+  langarHall: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Gurudwara_Bangla_Sahib-Langar_%281%29.jpg/1920px-Gurudwara_Bangla_Sahib-Langar_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Devotees seated in rows eating a community meal',
+    credit: 'Ji-Elle',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Gurudwara_Bangla_Sahib-Langar_(1).jpg',
+  },
+  langarRows: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Gurudwara_Bangla_Sahib-Langar_%283%29.jpg/1920px-Gurudwara_Bangla_Sahib-Langar_%283%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A community dining hall during the free meal',
+    credit: 'Ji-Elle',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Gurudwara_Bangla_Sahib-Langar_(3).jpg',
+  },
+  langarServe: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Gurudwara_Bangla_Sahib-Langar_%282%29.jpg/1920px-Gurudwara_Bangla_Sahib-Langar_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Volunteers walking the rows serving food',
+    credit: 'Ji-Elle',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Gurudwara_Bangla_Sahib-Langar_(2).jpg',
+  },
+  kitchenVolunteers: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Volunteers_cooking_at_Anandpur_Sahib_Gurdwara_Vaisakhi_langar%2C_Sikhism_in_India.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'Volunteers cooking together at a community kitchen',
+    credit: 'Sixtybolts',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Volunteers_cooking_at_Anandpur_Sahib_Gurdwara_Vaisakhi_langar,_Sikhism_in_India.jpg',
+  },
+  kitchenMen: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Sikh_Indian_men_cooking_at_volunteer_run_community_kitchen%2C_langar_Goindwal_Sahib.jpg/1920px-Sikh_Indian_men_cooking_at_volunteer_run_community_kitchen%2C_langar_Goindwal_Sahib.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Volunteers rolling bread at a community kitchen',
+    credit: 'jasleen_kaur from USA',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Sikh_Indian_men_cooking_at_volunteer_run_community_kitchen,_langar_Goindwal_Sahib.jpg',
+  },
+  kitchenOpen: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Anyone_is_free_to_join_in_and_eat_at_the_langar_%2827158029009%29.jpg/1920px-Anyone_is_free_to_join_in_and_eat_at_the_langar_%2827158029009%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Anyone is free to join and eat at the community meal',
+    credit: 'shankar s. from Dubai, united arab emirates',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Anyone_is_free_to_join_in_and_eat_at_the_langar_(27158029009).jpg',
+  },
+  prasadSweets: {
+    src: 'https://upload.wikimedia.org/wikipedia/commons/2/25/Royal_Sweets.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled',
+    alt: 'Trays of Indian sweets prepared as prasad',
+    credit: 'Braja Sorensen',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Royal_Sweets.jpg',
+  },
+  prasadThali: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/South_Indian_food_at_Sambarpot%2C_Lajpat_Nagar_2%2C_New_Delhi.jpg/1920px-South_Indian_food_at_Sambarpot%2C_Lajpat_Nagar_2%2C_New_Delhi.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A south Indian meal served on a plate',
+    credit: 'Dev Jadiya',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:South_Indian_food_at_Sambarpot,_Lajpat_Nagar_2,_New_Delhi.jpg',
+  },
+  procession: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/India_-_Hyderabad_-_064_-_festival_procession_%283920084093%29.jpg/1920px-India_-_Hyderabad_-_064_-_festival_procession_%283920084093%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A festival procession moving through the street',
+    credit: 'McKay Savage from London, UK',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:India_-_Hyderabad_-_064_-_festival_procession_(3920084093).jpg',
+  },
+  processionB: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/India_-_Hyderabad_-_065_-_festival_procession_%283920870486%29.jpg/1920px-India_-_Hyderabad_-_065_-_festival_procession_%283920870486%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Devotees walking in a festival procession',
+    credit: 'McKay Savage from London, UK',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:India_-_Hyderabad_-_065_-_festival_procession_(3920870486).jpg',
+  },
+  festivalTemple: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Virupaksha_Temple%2C_Hampi%2C_India%2C_Hindu_religious_festival_in_Shiva_Temple.jpg/1920px-Virupaksha_Temple%2C_Hampi%2C_India%2C_Hindu_religious_festival_in_Shiva_Temple.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A religious festival at a temple in Hampi',
+    credit: 'Vyacheslav Argenberg',
+    license: 'CC BY 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Virupaksha_Temple,_Hampi,_India,_Hindu_religious_festival_in_Shiva_Temple.jpg',
+  },
+  festivalTempleB: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Virupaksha_Temple%2C_Hampi%2C_India%2C_Religious_festival_in_Shiva_Temple.jpg/1920px-Virupaksha_Temple%2C_Hampi%2C_India%2C_Religious_festival_in_Shiva_Temple.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Devotees gathered for a temple festival',
+    credit: 'Vyacheslav Argenberg',
+    license: 'CC BY 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Virupaksha_Temple,_Hampi,_India,_Religious_festival_in_Shiva_Temple.jpg',
+  },
+  utsavRally: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ganesh_Utsav_Rally_%E2%80%93_Traditional_Procession_and_Celebration_12.jpg/1920px-Ganesh_Utsav_Rally_%E2%80%93_Traditional_Procession_and_Celebration_12.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A traditional festival procession with devotees',
+    credit: 'Shoot stufz',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Ganesh_Utsav_Rally_%E2%80%93_Traditional_Procession_and_Celebration_12.jpg',
+  },
+  utsavRallyB: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Ganesh_Utsav_Rally_%E2%80%93_Traditional_Procession_and_Celebration_19.jpg/1920px-Ganesh_Utsav_Rally_%E2%80%93_Traditional_Procession_and_Celebration_19.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Devotees celebrating during a festival procession',
+    credit: 'Shoot stufz',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Ganesh_Utsav_Rally_%E2%80%93_Traditional_Procession_and_Celebration_19.jpg',
+  },
+  priestPuja: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Pujari_%2849415673407%29.jpg/1920px-Pujari_%2849415673407%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A pujari performing the rituals of worship',
+    credit: 'Enrico Strocchi from Forlì, Italy',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Pujari_(49415673407).jpg',
+  },
+  devoteesPraying: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Devotees_Praying_at_Kamakhya_Temple%2C_Guwahati.JPG/1920px-Devotees_Praying_at_Kamakhya_Temple%2C_Guwahati.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Devotees praying with folded hands at a temple',
+    credit: 'Deeporaj',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Devotees_Praying_at_Kamakhya_Temple,_Guwahati.JPG',
+  },
+  devoteesPrayingB: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Devotees%2C_cuisine_and_temples_of_Vrindavan_32.jpg/1920px-Devotees%2C_cuisine_and_temples_of_Vrindavan_32.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Devotees at a temple town',
+    credit: 'Goutam1962',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Devotees,_cuisine_and_temples_of_Vrindavan_32.jpg',
+  },
+  devoteesPrayingC: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Devotees_praying_at_the_Panchmukhi_Maruti_Temple%2C_Pune.jpg/1920px-Devotees_praying_at_the_Panchmukhi_Maruti_Temple%2C_Pune.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Devotees praying at a temple',
+    credit: 'DesiBoy101',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Devotees_praying_at_the_Panchmukhi_Maruti_Temple,_Pune.jpg',
+  },
+  bhajanMandali: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Learning_Indian_classical_instruments_and_kirtan_singing_among_Sikhs.jpg/1920px-Learning_Indian_classical_instruments_and_kirtan_singing_among_Sikhs.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Devotees learning classical instruments and kirtan singing',
+    credit: 'gurmatsangeetorg',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Learning_Indian_classical_instruments_and_kirtan_singing_among_Sikhs.jpg',
+  },
+  bhajanGroup: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Gujarati_traditional_Bhajan.jpg/1920px-Gujarati_traditional_Bhajan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A traditional bhajan group singing together',
+    credit: 'Gazal world',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Gujarati_traditional_Bhajan.jpg',
+  },
+  goshala: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Goshala_More_at_Jalpaiguri_02.jpg/1920px-Goshala_More_at_Jalpaiguri_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Cows at a goshala',
+    credit: 'Pinakpani',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Goshala_More_at_Jalpaiguri_02.jpg',
+  },
+  goshalaB: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Goshala_More_at_Jalpaiguri_04.jpg/1920px-Goshala_More_at_Jalpaiguri_04.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Cattle resting at a goshala',
+    credit: 'Pinakpani',
+    license: 'CC BY-SA 4.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Goshala_More_at_Jalpaiguri_04.jpg',
+  },
+  deepLights: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Festival_of_Lights_Diwali_Retail_City_Walk_in_Delhi_India_lit_up_in_festive_lights_2010.jpg/1920px-Festival_of_Lights_Diwali_Retail_City_Walk_in_Delhi_India_lit_up_in_festive_lights_2010.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'A street lit up with lights for Diwali',
+    credit: 'Harsh Agrawal',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Festival_of_Lights_Diwali_Retail_City_Walk_in_Delhi_India_lit_up_in_festive_lights_2010.jpg',
+  },
+  deepLightsB: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/Festival_of_lights_Diwali_in_Hamburg_Germany_November_2013.jpg/1920px-Festival_of_lights_Diwali_in_Hamburg_Germany_November_2013.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Diwali lamps lit for the festival of lights',
+    credit: 'John Heaven',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Festival_of_lights_Diwali_in_Hamburg_Germany_November_2013.jpg',
+  },
+  deepLightsC: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Festival_of_lights_Diwali_in_Hamburg_Germany_November_2013_b.jpg/1920px-Festival_of_lights_Diwali_in_Hamburg_Germany_November_2013_b.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Lamps and lights during Diwali celebrations',
+    credit: 'John Heaven',
+    license: 'CC BY 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Festival_of_lights_Diwali_in_Hamburg_Germany_November_2013_b.jpg',
+  },
+  sparkles: {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Sparkles_phuljhari_fireworks_on_DIWALI%2C_festival_of_lights.jpg/1920px-Sparkles_phuljhari_fireworks_on_DIWALI%2C_festival_of_lights.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail',
+    alt: 'Sparklers lit during the festival of lights',
+    credit: 'Sunciti _ Sundaram\'s Images + Messages',
+    license: 'CC BY-SA 2.0',
+    source: 'https://commons.wikimedia.org/wiki/File:Sparkles_phuljhari_fireworks_on_DIWALI,_festival_of_lights.jpg',
+  },
+} as const satisfies Record<string, Photo>
+
+export type PhotoKey = keyof typeof photos
+
+export const photo = (k: PhotoKey): Photo => photos[k]
+
+/** Ordered pools used where a page needs "some photographs of X". */
+export const pools = {
+  temples: [
+    'usTempleA', 'usTempleC', 'templeBengaluru', 'usMandirA', 'templeTower',
+    'usTempleD', 'templeChennai', 'usMandirB', 'templeFacade', 'usTempleB',
+  ],
+  festivals: ['procession', 'deepLights', 'utsavRally', 'festivalTemple', 'diyaLamps', 'pandalNight', 'processionB', 'sparkles'],
+  worship: ['aartiThali', 'dhuniFire', 'priestPuja', 'aartiLamp', 'devoteesPraying', 'havanRitual'],
+  annadanam: ['langarServing', 'kitchenVolunteers', 'langarHall', 'langarPrep', 'prasadSweets', 'langarServe'],
+} as const satisfies Record<string, readonly PhotoKey[]>
+
+export const fromPool = (pool: keyof typeof pools, i: number): Photo =>
+  photos[pools[pool][i % pools[pool].length]]

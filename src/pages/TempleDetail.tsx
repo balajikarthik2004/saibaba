@@ -5,7 +5,9 @@ import { events } from '../data/events'
 import { useApp } from '../lib/store'
 import { clockIn, cn, fmtDayMonth, to12h, useReveal, weekdayIn } from '../lib/utils'
 import { AartiRing } from '../components/AartiRing'
-import { ArtTile, Divider, EmberField, Mandala } from '../components/Sacred'
+import { Divider, EmberField, Mandala } from '../components/Sacred'
+import { Photo } from '../components/Photo'
+import { fromPool, photos } from '../data/images'
 import { Badge, Button, KeyValue, Panel, Section, Stat } from '../components/ui'
 
 export default function TempleDetail() {
@@ -40,6 +42,8 @@ export default function TempleDetail() {
     <div ref={ref}>
       {/* hero */}
       <section className="relative overflow-hidden px-5 pb-12 pt-10 sm:px-8 sm:pt-16">
+        <Photo photo={photos.usTempleC} fill priority fallbackSeed={3} />
+        <div className="absolute inset-0 bg-gradient-to-b from-bg/92 via-bg/90 to-bg" />
         <EmberField count={16} />
         <Mandala className="pointer-events-none absolute -left-44 -top-40 size-[540px] opacity-[0.13] animate-reverse-spin" />
 
@@ -242,10 +246,13 @@ export default function TempleDetail() {
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {templeEvents.map((e, i) => (
             <Link key={e.id} to={`/events/${e.id}`} className="reveal group panel overflow-hidden">
-              <div className="relative h-28 overflow-hidden">
-                <ArtTile seed={i + 4} className="transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface to-transparent" />
-              </div>
+              <Photo
+                photo={fromPool('festivals', i + 1)}
+                className="h-28 w-full"
+                fallbackSeed={i + 4}
+                imgClassName="transition-transform duration-700 group-hover:scale-105"
+                scrim
+              />
               <div className="px-5 pb-5 pt-1">
                 <p className="text-[11px] uppercase tracking-[0.2em] text-gold">{fmtDayMonth(e.date)}</p>
                 <p className="mt-1.5 text-balance text-[15px] leading-snug">{e.title}</p>

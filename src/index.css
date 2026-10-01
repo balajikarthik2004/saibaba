@@ -41,28 +41,34 @@
 :root,
 [data-theme="dark"] {
   color-scheme: dark;
-  --c-bg: #120a06;
-  --c-bg-deep: #0a0503;
-  --c-surface: #1d120b;
-  --c-surface-2: #261810;
-  --c-line: rgb(201 161 74 / 0.18);
-  --c-line-strong: rgb(201 161 74 / 0.42);
 
-  --c-ink: #f8eedd;
-  --c-ink-soft: #d3bfa3;
-  --c-ink-faint: #9b876c;
+  /* Warm charcoal rather than brown — brown-on-brown read as muddy, and
+     photographs sat badly on it. Surfaces now step cleanly apart. */
+  --c-bg: #0d0b09;
+  --c-bg-deep: #060504;
+  --c-surface: #17130f;
+  --c-surface-2: #221c16;
+  --c-line: rgb(214 178 110 / 0.16);
+  --c-line-strong: rgb(214 178 110 / 0.46);
 
-  --c-ember: #f97316;
-  --c-ember-soft: #fbbf24;
-  --c-gold: #c9a14a;
-  --c-gold-light: #ecd9a8;
-  --c-kumkum: #b8302f;
-  --c-neem: #3f7d68;
-  --c-sandal: #f6ecda;
+  /* Raised contrast: ink-faint was failing against the surface. */
+  --c-ink: #f7f1e8;
+  --c-ink-soft: #cdc1b1;
+  --c-ink-faint: #a09384;
 
-  --glow: 0 0 60px -12px rgb(249 115 22 / 0.55);
-  --card-shadow: 0 24px 60px -32px rgb(0 0 0 / 0.9);
-  --veil: rgb(18 10 6 / 0.72);
+  --c-ember: #fb923c;
+  --c-ember-soft: #fcd34d;
+  --c-gold: #d9b26a;
+  --c-gold-light: #f2e2bb;
+  --c-kumkum: #e0564f;
+  --c-neem: #5aa58b;
+  --c-sandal: #f7f1e8;
+
+  --veil-opacity: 0.1;
+  --glow: 0 0 60px -14px rgb(251 146 60 / 0.5);
+  --card-shadow: 0 20px 48px -28px rgb(0 0 0 / 0.78);
+  --veil: rgb(13 11 9 / 0.82);
+  --img-shade: rgb(13 11 9 / 0.3);
 }
 
 [data-theme="light"] {
@@ -86,9 +92,11 @@
   --c-neem: #2f6354;
   --c-sandal: #2e1d0e;
 
+  --veil-opacity: 0.16;
   --glow: 0 0 50px -16px rgb(217 86 11 / 0.4);
-  --card-shadow: 0 20px 44px -30px rgb(80 50 10 / 0.5);
-  --veil: rgb(251 244 230 / 0.78);
+  --card-shadow: 0 18px 40px -28px rgb(80 50 10 / 0.42);
+  --veil: rgb(251 244 230 / 0.86);
+  --img-shade: rgb(46 29 14 / 0.18);
 }
 
 * {
@@ -109,16 +117,18 @@ body {
   overflow-x: hidden;
 }
 
-/* Parchment grain + a warm halo that follows the page */
+/* A restrained warm halo — heavy enough to feel lit, light enough that
+   photographs keep their own colour. */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  opacity: var(--veil-opacity, 0.12);
   background:
-    radial-gradient(900px 520px at 50% -10%, rgb(249 115 22 / 0.16), transparent 70%),
-    radial-gradient(700px 420px at 100% 100%, rgb(201 161 74 / 0.1), transparent 70%);
+    radial-gradient(1000px 560px at 50% -12%, var(--c-ember), transparent 68%),
+    radial-gradient(760px 440px at 100% 100%, var(--c-gold), transparent 70%);
 }
 
 body::after {
@@ -127,7 +137,7 @@ body::after {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.035;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
 }
@@ -162,11 +172,12 @@ h1, h2, h3, h4, .font-display {
    ============================================================ */
 @utility panel {
   background:
-    linear-gradient(145deg, color-mix(in srgb, var(--c-surface) 92%, transparent), color-mix(in srgb, var(--c-surface-2) 88%, transparent));
+    linear-gradient(152deg, var(--c-surface), color-mix(in srgb, var(--c-surface-2) 82%, var(--c-surface)));
   border: 1px solid var(--c-line);
   border-radius: var(--radius-md);
-  box-shadow: var(--card-shadow);
-  backdrop-filter: blur(14px);
+  box-shadow:
+    0 1px 0 0 color-mix(in srgb, var(--c-gold) 8%, transparent) inset,
+    var(--card-shadow);
 }
 
 @utility gold-rule {
@@ -183,6 +194,24 @@ h1, h2, h3, h4, .font-display {
 
 @utility ring-gold {
   box-shadow: 0 0 0 1px var(--c-line-strong), 0 0 40px -18px var(--c-ember);
+}
+
+/* Photographs sit on a warm scrim so overlaid type stays legible in both
+   themes, and lose a little saturation so the gold UI still leads. */
+@utility photo-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--c-surface) 2%, color-mix(in srgb, var(--c-surface) 55%, transparent) 38%, transparent 78%);
+}
+
+@utility photo-tint {
+  filter: saturate(0.92) contrast(1.04);
+}
+
+@utility elevated {
+  box-shadow:
+    0 1px 0 0 color-mix(in srgb, var(--c-gold) 9%, transparent) inset,
+    var(--card-shadow);
 }
 
 /* ============================================================
@@ -225,6 +254,28 @@ h1, h2, h3, h4, .font-display {
 .animate-marquee { animation: marquee 38s linear infinite; }
 
 .rise-in { animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Placeholder shown while a photograph decodes. */
+.skeleton {
+  background: linear-gradient(
+    100deg,
+    var(--c-surface-2) 20%,
+    color-mix(in srgb, var(--c-gold) 10%, var(--c-surface-2)) 42%,
+    var(--c-surface-2) 62%
+  );
+  background-size: 220% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.photo-fade {
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.photo-fade.is-loaded {
+  opacity: 1;
+  transform: none;
+}
 
 .reveal {
   opacity: 0;

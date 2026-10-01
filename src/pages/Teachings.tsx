@@ -1,7 +1,8 @@
-﻿import { babaTimeline, elevenAssurances, guidingPrinciples, quotes } from '../data/satcharitra'
+import { babaTimeline, elevenAssurances, guidingPrinciples, quotes } from '../data/satcharitra'
 import { useReveal } from '../lib/utils'
 import { BabaSilhouette, Divider, EmberField, Mandala, OmMark } from '../components/Sacred'
 import { Button, PageHeader, Panel, Section, SectionHeading } from '../components/ui'
+import { photos } from '../data/images'
 
 export default function Teachings() {
   const ref = useReveal<HTMLDivElement>()
@@ -9,9 +10,10 @@ export default function Teachings() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.babaDwarkamai}
         eyebrow="His life & teaching"
         title="He asked for two coins only"
-        sub="No lineage, no birthplace, no doctrine to sign. Shraddha and Saburi â€” faith and patience â€” and a fire that has not gone out since 1858."
+        sub="No lineage, no birthplace, no doctrine to sign. Shraddha and Saburi — faith and patience — and a fire that has not gone out since 1858."
       />
 
       {/* principles */}
@@ -46,7 +48,7 @@ export default function Teachings() {
           <Panel className="reveal grid place-items-center px-6 py-10 text-center">
             <div>
               <OmMark size={28} className="mx-auto text-gold" />
-              <p className="mt-4 font-deva text-[15px] text-gold-light/85">à¤¶à¥à¤°à¥€ à¤¸à¤šà¥à¤šà¤¿à¤¦à¤¾à¤¨à¤‚à¤¦ à¤¸à¤¦à¤—à¥à¤°à¥ à¤¸à¤¾à¤ˆà¤¨à¤¾à¤¥ à¤®à¤¹à¤¾à¤°à¤¾à¤œ à¤•à¥€ à¤œà¤¯</p>
+              <p className="mt-4 font-deva text-[15px] text-gold-light/85">श्री सच्चिदानंद सदगुरु साईनाथ महाराज की जय</p>
             </div>
           </Panel>
         </div>
@@ -89,8 +91,8 @@ export default function Teachings() {
         <div className="relative grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {quotes.map((q, i) => (
             <Panel key={i} hover className="reveal flex flex-col justify-between px-7 py-8">
-              <p className="font-quote text-[20px] italic leading-snug text-ink">â€œ{q.text}â€</p>
-              <p className="mt-5 text-[11px] uppercase tracking-[0.24em] text-gold">â€” {q.source}</p>
+              <p className="font-quote text-[20px] italic leading-snug text-ink">“{q.text}”</p>
+              <p className="mt-5 text-[11px] uppercase tracking-[0.24em] text-gold">— {q.source}</p>
             </Panel>
           ))}
         </div>
@@ -105,20 +107,20 @@ export default function Teachings() {
               All this will be ash. Take a pinch and remember what is not.
             </h2>
             <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-ink-soft">
-              Baba kept a fire burning in Dwarkamai for sixty years and gave its ash to everyone who came â€” for
+              Baba kept a fire burning in Dwarkamai for sixty years and gave its ash to everyone who came — for
               fever, for childlessness, for plague, for a journey. He never explained it as medicine. The Udi was
               His standing sermon: the body and everything it chases becomes this grey powder, and the one who
               hands it to you does not.
             </p>
             <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-ink-soft">
-              Every sannidhi in this network keeps a Dhuni lit from the same tradition. Chicagoâ€™s has not been
-              allowed to go out since 2003. The ash is packed by hand each Thursday and given free at the counter â€”
+              Every sannidhi in this network keeps a Dhuni lit from the same tradition. Chicago’s has not been
+              allowed to go out since 2003. The ash is packed by hand each Thursday and given free at the counter —
               or posted to you if you cannot come.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button to="/sevas">Request Udi by mail</Button>
               <Button to="/satcharitra" variant="outline">
-                Chapters 33 & 34 â€” the Udi leelas
+                Chapters 33 & 34 — the Udi leelas
               </Button>
             </div>
           </div>
@@ -127,7 +129,7 @@ export default function Teachings() {
             <Mandala className="pointer-events-none absolute left-1/2 top-1/2 size-[440px] -translate-x-1/2 -translate-y-1/2 opacity-[0.16] animate-slow-spin" />
             <BabaSilhouette className="relative w-[min(60vw,240px)]" />
             <Divider className="relative mt-6 w-40" icon="diya" />
-            <p className="relative mt-4 font-deva text-[14px] text-gold">à¤¸à¤¬à¤•à¤¾ à¤®à¤¾à¤²à¤¿à¤• à¤à¤•</p>
+            <p className="relative mt-4 font-deva text-[14px] text-gold">सबका मालिक एक</p>
           </div>
         </Panel>
       </Section>

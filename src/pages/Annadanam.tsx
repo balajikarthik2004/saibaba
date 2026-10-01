@@ -1,10 +1,11 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { Check, ChevronLeft, ChevronRight, Utensils } from 'lucide-react'
 import { temples } from '../data/temples'
 import { useApp } from '../lib/store'
 import { cn, fmtDateLong, usd, useReveal } from '../lib/utils'
 import { Divider, EmberField, Mandala } from '../components/Sacred'
 import { Badge, Button, Field, Input, PageHeader, Panel, Section, SectionHeading, Select, Stat, Textarea } from '../components/ui'
+import { photos } from '../data/images'
 
 const tiers = [
   {
@@ -12,7 +13,7 @@ const tiers = [
     name: 'Half day',
     price: 151,
     serves: '~150 plates',
-    detail: 'One meal service â€” the noon annadanam after Madhyan Aarti.',
+    detail: 'One meal service — the noon annadanam after Madhyan Aarti.',
   },
   {
     id: 'full',
@@ -27,14 +28,14 @@ const tiers = [
     name: 'Thursday',
     price: 501,
     serves: '~900 plates',
-    detail: 'Babaâ€™s own day â€” the largest gathering of the week, palki and all.',
+    detail: 'Baba’s own day — the largest gathering of the week, palki and all.',
   },
   {
     id: 'festival',
     name: 'Festival day',
     price: 1101,
     serves: '2,000+ plates',
-    detail: 'Punyatithi, Ram Navami or Navratri â€” the maha annadanam.',
+    detail: 'Punyatithi, Ram Navami or Navratri — the maha annadanam.',
   },
 ]
 
@@ -78,7 +79,7 @@ export default function Annadanam() {
     }
     addBooking({
       kind: 'annadanam',
-      title: `Annadanam â€” ${selectedTier.name}`,
+      title: `Annadanam — ${selectedTier.name}`,
       templeId,
       date: isoDate,
       amount: selectedTier.price,
@@ -92,6 +93,7 @@ export default function Annadanam() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.langarHall}
         eyebrow="Annadanam"
         title="Feed whoever comes to the door"
         sub="Baba begged bhiksha at five houses every day for sixty years and cooked for the whole village from one pot. Nobody was asked their name, caste or religion first."
@@ -117,7 +119,7 @@ export default function Annadanam() {
           align="left"
           eyebrow="Choose the scale"
           title="Sponsor a day of meals"
-          sub="Your family is named as that dayâ€™s yajamana at all four aartis, and you are welcome to come and serve the meal yourself."
+          sub="Your family is named as that day’s yajamana at all four aartis, and you are welcome to come and serve the meal yourself."
         />
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {tiers.map((t) => (
@@ -221,14 +223,14 @@ export default function Annadanam() {
                 <span className="mx-auto grid size-14 place-items-center rounded-full border border-ember/40 bg-ember/10">
                   <Check size={22} className="text-ember" />
                 </span>
-                <p className="mt-5 font-deva text-[14px] text-gold">à¥ à¤¸à¤¾à¤ˆà¤‚ à¤°à¤¾à¤®</p>
+                <p className="mt-5 font-deva text-[14px] text-gold">ॐ साईं राम</p>
                 <h3 className="mt-3 font-display text-2xl">The day is yours</h3>
                 <p className="mt-4 text-[13.5px] leading-relaxed text-ink-soft">
                   {fmtDateLong(isoDate)} at {temples.find((t) => t.id === templeId)?.shortName}. Your name will be
                   read at all four aartis, and the kitchen will expect you if you want to serve.
                 </p>
                 <div className="mt-7 flex flex-col gap-3">
-                  <Button to="/account" size="sm" full>
+                  <Button to="/dashboard/sevas" size="sm" full>
                     See it in My Seva
                   </Button>
                   <Button
@@ -264,7 +266,7 @@ export default function Annadanam() {
                     <Select value={templeId} onChange={(e) => setTempleId(e.target.value)}>
                       {temples.map((t) => (
                         <option key={t.id} value={t.id}>
-                          {t.shortName} â€” {t.city}, {t.stateCode}
+                          {t.shortName} — {t.city}, {t.stateCode}
                         </option>
                       ))}
                     </Select>
@@ -274,7 +276,7 @@ export default function Annadanam() {
                     <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Family name" />
                   </Field>
 
-                  <Field label="Dedication" hint="In memory of, in gratitude for, on the occasion ofâ€¦">
+                  <Field label="Dedication" hint="In memory of, in gratitude for, on the occasion of…">
                     <Textarea
                       value={dedication}
                       onChange={(e) => setDedication(e.target.value)}
@@ -297,7 +299,7 @@ export default function Annadanam() {
                   Sponsor this day
                 </Button>
                 <p className="mt-4 text-center text-[11.5px] leading-relaxed text-ink-faint">
-                  Tax-deductible. Mock data â€” no payment is taken in this build.
+                  Tax-deductible. Mock data — no payment is taken in this build.
                 </p>
               </>
             )}
@@ -307,9 +309,9 @@ export default function Annadanam() {
 
       <Section wide className="pb-24 pt-14">
         <Panel className="reveal flex flex-col items-center gap-5 px-8 py-12 text-center">
-          <p className="font-deva text-[15px] text-gold">à¤…à¤¨à¥à¤¨à¤¦à¤¾à¤¨à¤®à¥</p>
+          <p className="font-deva text-[15px] text-gold">अन्नदानम्</p>
           <h2 className="max-w-2xl text-balance text-3xl leading-tight">
-            â€œFeed the hungry before you worship Me.â€
+            “Feed the hungry before you worship Me.”
           </h2>
           <p className="max-w-xl text-[14.5px] leading-relaxed text-ink-soft">
             If you would rather give your hands than your money, the kitchens start at four in the morning and

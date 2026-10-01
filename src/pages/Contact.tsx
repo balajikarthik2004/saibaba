@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ChevronDown, Mail, MapPin, Navigation, Phone, Send } from 'lucide-react'
 import { faqs } from '../data/community'
@@ -7,9 +7,10 @@ import { useApp } from '../lib/store'
 import { cn, useReveal } from '../lib/utils'
 import { Divider, EmberField, Mandala, OmMark } from '../components/Sacred'
 import { Button, Field, Input, PageHeader, Panel, Section, SectionHeading, Select, Textarea } from '../components/ui'
+import { photos } from '../data/images'
 
 const reasons = [
-  'First visit â€” what should I expect?',
+  'First visit — what should I expect?',
   'Booking a seva or pooja',
   'Annadanam sponsorship',
   'Hall or wedding booking',
@@ -45,6 +46,7 @@ export default function Contact() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.templeFacade}
         eyebrow="Visiting & contact"
         title="Never been to a temple? Start here."
         sub="Leave your shoes at the door, sit anywhere, and eat the prasad. That is genuinely all that is expected of you."
@@ -60,17 +62,17 @@ export default function Contact() {
               {
                 n: '01',
                 t: 'Arriving',
-                b: 'Shoes come off at the rack by the door â€” there is no charge and nothing goes missing. Dress comfortably and modestly: covered shoulders and knees. There is no entry fee, ever, and no dress code beyond that.',
+                b: 'Shoes come off at the rack by the door — there is no charge and nothing goes missing. Dress comfortably and modestly: covered shoulders and knees. There is no entry fee, ever, and no dress code beyond that.',
               },
               {
                 n: '02',
                 t: 'Inside',
-                b: 'Walk in and sit anywhere â€” the floor at the front, or a chair at the side. You do not need to know the songs. When the tray of lamps comes round, pass your hands over the flame and touch your forehead, or simply let it pass.',
+                b: 'Walk in and sit anywhere — the floor at the front, or a chair at the side. You do not need to know the songs. When the tray of lamps comes round, pass your hands over the flame and touch your forehead, or simply let it pass.',
               },
               {
                 n: '03',
                 t: 'Leaving',
-                b: 'You will be given Udi â€” grey ash â€” for your forehead, and prasad to eat. Take both. Refusing the food is the only genuinely impolite thing you can do in a Sai temple.',
+                b: 'You will be given Udi — grey ash — for your forehead, and prasad to eat. Take both. Refusing the food is the only genuinely impolite thing you can do in a Sai temple.',
               },
             ].map((s) => (
               <div key={s.n}>
@@ -155,7 +157,7 @@ export default function Contact() {
                       >
                         {temples.map((t) => (
                           <option key={t.id} value={t.id}>
-                            {t.shortName} â€” {t.city}, {t.stateCode}
+                            {t.shortName} — {t.city}, {t.stateCode}
                           </option>
                         ))}
                       </Select>
@@ -177,7 +179,7 @@ export default function Contact() {
                           setError('')
                         }}
                         className="min-h-36"
-                        placeholder="Ask anything â€” there is no wrong question."
+                        placeholder="Ask anything — there is no wrong question."
                       />
                     </Field>
                   </div>
@@ -238,7 +240,7 @@ export default function Contact() {
         </div>
 
         <Divider className="mx-auto my-12 max-w-md" icon="om" />
-        <p className="reveal text-center font-deva text-[15px] text-gold">à¥ à¤¸à¤¾à¤ˆà¤‚ à¤°à¤¾à¤®</p>
+        <p className="reveal text-center font-deva text-[15px] text-gold">ॐ साईं राम</p>
       </Section>
     </div>
   )

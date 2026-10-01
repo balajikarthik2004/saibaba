@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect } from 'react'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { BasketBar, Footer, Header, Toaster } from './components/Shell'
 import { Diya, Mandala } from './components/Sacred'
 import Home from './pages/Home'
@@ -21,9 +21,12 @@ const Gallery = lazy(() => import('./pages/Gallery'))
 const Experiences = lazy(() => import('./pages/Experiences'))
 const Volunteer = lazy(() => import('./pages/Volunteer'))
 const Donate = lazy(() => import('./pages/Donate'))
-const Account = lazy(() => import('./pages/Account'))
 const Contact = lazy(() => import('./pages/Contact'))
 const NotFound = lazy(() => import('./pages/NotFound'))
+const Credits = lazy(() => import('./pages/Credits'))
+const Login = lazy(() => import('./pages/Login'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+const RequireAuth = lazy(() => import('./pages/Login').then((m) => ({ default: m.RequireAuth })))
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -46,6 +49,11 @@ function PageLoader() {
 }
 
 export default function App() {
+  const { pathname } = useLocation()
+  // The dashboard and the sign-in screen are app surfaces, not marketing
+  // pages — the long site footer does not belong on either.
+  const chromeless = pathname.startsWith('/dashboard') || pathname.startsWith('/login')
+
   return (
     <div className="flex min-h-dvh flex-col">
       <ScrollToTop />
@@ -69,13 +77,24 @@ export default function App() {
             <Route path="/experiences" element={<Experiences />} />
             <Route path="/volunteer" element={<Volunteer />} />
             <Route path="/donate" element={<Donate />} />
-            <Route path="/account" element={<Account />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/credits" element={<Credits />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/dashboard/*"
+              element={
+                <RequireAuth>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            />
+            {/* The old account page now lives inside the dashboard. */}
+            <Route path="/account" element={<Navigate to="/dashboard" replace />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
-      <Footer />
+      {!chromeless && <Footer />}
       <Toaster />
       <BasketBar />
     </div>

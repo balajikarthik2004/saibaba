@@ -1,4 +1,4 @@
-﻿/* eslint-disable react-refresh/only-export-components -- provider and its hook belong together */
+/* eslint-disable react-refresh/only-export-components -- provider and its hook belong together */
 import {
   createContext,
   useCallback,
@@ -24,6 +24,21 @@ const K = {
   favourites: 'sai.favourites',
   profile: 'sai.profile',
   blessed: 'sai.blessed',
+  user: 'sai.user',
+}
+
+/**
+ * Development authentication only. There is no server, no password check and
+ * no token — the session is a record in localStorage so the dashboard can be
+ * demonstrated end to end. Replace `signIn` with a real call when the backend
+ * exists; nothing else in the app reads credentials.
+ */
+export interface SessionUser {
+  name: string
+  email: string
+  role: 'Devotee' | 'Volunteer' | 'Trustee'
+  since: string
+  templeId: string
 }
 
 export interface Profile {
@@ -85,6 +100,10 @@ interface Ctx {
   profile: Profile
   setProfile: (p: Profile) => void
 
+  user: SessionUser | null
+  signIn: (email: string, name?: string, role?: SessionUser['role']) => SessionUser
+  signOut: () => void
+
   toasts: Toast[]
   notify: (title: string, body?: string) => void
   dismissToast: (id: string) => void
@@ -105,6 +124,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [favourites, setFavourites] = useState<string[]>(() => readStore<string[]>(K.favourites, []))
   const [blessed, setBlessed] = useState<string[]>(() => readStore<string[]>(K.blessed, []))
   const [profile, setProfileState] = useState<Profile>(() => readStore<Profile>(K.profile, emptyProfile))
+  const [user, setUser] = useState<SessionUser | null>(() => readStore<SessionUser | null>(K.user, null))
   const [toasts, setToasts] = useState<Toast[]>([])
 
   const temple = useMemo(() => temples.find((x) => x.id === templeId) ?? temples[0], [templeId])
@@ -122,6 +142,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => writeStore(K.favourites, favourites), [favourites])
   useEffect(() => writeStore(K.blessed, blessed), [blessed])
   useEffect(() => writeStore(K.profile, profile), [profile])
+  useEffect(() => writeStore(K.user, user), [user])
 
   const notify = useCallback((title: string, body?: string) => {
     const id = slugId('t')
@@ -218,6 +239,27 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
     profile,
     setProfile: setProfileState,
+
+    user,
+    signIn: (email, name, role = 'Devotee') => {
+      const derived =
+        name?.trim() ||
+        email
+          .split('@')[0]
+          .replace(/[._-]+/g, ' ')
+          .replace(/\b\w/g, (ch) => ch.toUpperCase())
+      const session: SessionUser = {
+        name: derived,
+        email: email.trim(),
+        role,
+        since: new Date().toISOString(),
+        templeId,
+      }
+      setUser(session)
+      setProfileState((p) => ({ ...p, name: derived, email: email.trim() }))
+      return session
+    },
+    signOut: () => setUser(null),
 
     toasts,
     notify,

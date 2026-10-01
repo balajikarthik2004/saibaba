@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { Check, Receipt, ShieldCheck } from 'lucide-react'
 import { campaigns } from '../data/community'
 import { temples } from '../data/temples'
@@ -6,6 +6,7 @@ import { useApp } from '../lib/store'
 import { cn, fmtDate, usd, useReveal } from '../lib/utils'
 import { Divider, EmberField, Mandala } from '../components/Sacred'
 import { Badge, Button, Field, Input, PageHeader, Panel, Progress, Section, SectionHeading, Select, Stat } from '../components/ui'
+import { photos } from '../data/images'
 
 const amounts = [21, 51, 108, 251, 501, 1101]
 
@@ -57,7 +58,7 @@ export default function Donate() {
             <span className="mx-auto grid size-16 place-items-center rounded-full border border-ember/40 bg-ember/10">
               <Check size={26} className="text-ember" />
             </span>
-            <p className="mt-7 font-deva text-[15px] text-gold">à¥ à¤¸à¤¾à¤ˆà¤‚ à¤°à¤¾à¤®</p>
+            <p className="mt-7 font-deva text-[15px] text-gold">ॐ साईं राम</p>
             <h1 className="mt-3 font-display text-4xl">Received with gratitude</h1>
             <p className="mx-auto mt-5 max-w-lg text-[14.5px] leading-relaxed text-ink-soft">
               Your receipt has gone to <span className="text-gold-light">{email}</span>. A consolidated statement
@@ -84,7 +85,7 @@ export default function Donate() {
             </Panel>
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <Button to="/account">See all my giving</Button>
+              <Button to="/dashboard/giving">See all my giving</Button>
               <Button variant="outline" onClick={() => setReceipt(null)}>
                 Give again
               </Button>
@@ -98,9 +99,10 @@ export default function Donate() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.marigoldHeap}
         eyebrow="Donate"
         title="Where your offering actually goes"
-        sub="Six funds, each tied to something you can walk into and see â€” a kitchen, a goshala, a hall, a van that brings elders to aarti."
+        sub="Six funds, each tied to something you can walk into and see — a kitchen, a goshala, a hall, a van that brings elders to aarti."
       />
 
       <Section wide className="pt-0">
@@ -141,7 +143,7 @@ export default function Donate() {
                         {usd(c.raised)} <span className="text-[12px] text-ink-faint">of {usd(c.goal)}</span>
                       </span>
                       <span className="text-[11.5px] text-ink-faint">
-                        {c.donors.toLocaleString()} donors Â·{' '}
+                        {c.donors.toLocaleString()} donors ·{' '}
                         {c.templeId === 'all'
                           ? 'network-wide'
                           : temples.find((t) => t.id === c.templeId)?.shortName}
@@ -235,7 +237,7 @@ export default function Donate() {
                   <Select value={templeId} onChange={(e) => setTempleId(e.target.value)}>
                     {temples.map((t) => (
                       <option key={t.id} value={t.id}>
-                        {t.shortName} â€” {t.city}, {t.stateCode}
+                        {t.shortName} — {t.city}, {t.stateCode}
                       </option>
                     ))}
                   </Select>
@@ -261,7 +263,7 @@ export default function Donate() {
 
               <p className="mt-5 flex items-start gap-2.5 text-[11.5px] leading-relaxed text-ink-faint">
                 <ShieldCheck size={13} className="mt-0.5 shrink-0 text-neem" />
-                501(c)(3) Â· EIN 00-0000000 Â· receipt issued immediately. Mock data â€” no payment is taken in this
+                501(c)(3) · EIN 00-0000000 · receipt issued immediately. Mock data — no payment is taken in this
                 build.
               </p>
             </Panel>
@@ -273,15 +275,15 @@ export default function Donate() {
         <SectionHeading eyebrow="Accountability" title="What the network spends" />
         <Panel className="reveal px-8 py-12">
           <div className="grid gap-8 sm:grid-cols-4">
-            <Stat value="86Â¢" label="Of every dollar" sub="to programmes" />
-            <Stat value="9Â¢" label="Facilities" sub="upkeep & utilities" />
-            <Stat value="5Â¢" label="Administration" />
+            <Stat value="86¢" label="Of every dollar" sub="to programmes" />
+            <Stat value="9¢" label="Facilities" sub="upkeep & utilities" />
+            <Stat value="5¢" label="Administration" />
             <Stat value="100%" label="Volunteer board" />
           </div>
           <Divider className="my-9" icon="om" />
           <p className="mx-auto max-w-2xl text-center text-[13.5px] leading-relaxed text-ink-soft">
             Annual audited statements and Form 990 filings are published each spring and posted at the office of
-            every sannidhi. Ask any trustee for a copy â€” they are required to hand you one.
+            every sannidhi. Ask any trustee for a copy — they are required to hand you one.
           </p>
         </Panel>
       </Section>

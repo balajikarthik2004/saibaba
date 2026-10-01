@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { BookOpen, Check, RotateCcw, Search, X } from 'lucide-react'
 import { chapters, saptahDays } from '../data/satcharitra'
 import { useApp } from '../lib/store'
@@ -6,6 +6,7 @@ import type { Chapter } from '../lib/types'
 import { cn, useReveal } from '../lib/utils'
 import { Divider, Mandala, OmMark } from '../components/Sacred'
 import { Badge, Button, Chip, PageHeader, Panel, Progress, Section, Stat } from '../components/ui'
+import { photos } from '../data/images'
 
 export default function Satcharitra() {
   const { parayan, toggleParayanChapter, resetParayan, notify } = useApp()
@@ -29,9 +30,10 @@ export default function Satcharitra() {
   return (
     <div ref={ref}>
       <PageHeader
+        photo={photos.babaSeated}
         eyebrow="Shri Sai Satcharitra"
         title="Fifty-three chapters, seven days"
-        sub="Hemadpant wrote it down because Baba told him to. The Saptah Parayan reads the whole book from one Thursday to the next â€” track yours here."
+        sub="Hemadpant wrote it down because Baba told him to. The Saptah Parayan reads the whole book from one Thursday to the next — track yours here."
       />
 
       <Section wide className="pt-0">
@@ -45,7 +47,7 @@ export default function Satcharitra() {
                 {parayan.length === 0
                   ? 'Begin on a Thursday'
                   : parayan.length === 53
-                    ? 'Saptah complete â€” udyapan and annadanam'
+                    ? 'Saptah complete — udyapan and annadanam'
                     : `Day ${currentDay} of the Saptah`}
               </h2>
               <p className="mt-4 max-w-xl text-[14px] leading-relaxed text-ink-soft">
@@ -117,7 +119,7 @@ export default function Satcharitra() {
                       </span>
                       <span className="min-w-0 flex-1">
                         <span className="block text-[13px] text-ink">
-                          Chapters {d.chapters[0].n}â€“{d.chapters[d.chapters.length - 1].n}
+                          Chapters {d.chapters[0].n}–{d.chapters[d.chapters.length - 1].n}
                         </span>
                         <span className="block text-[11.5px] text-ink-faint">
                           {read} of {d.chapters.length} read
@@ -143,7 +145,7 @@ export default function Satcharitra() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search chapters â€” Udi, Mahasamadhi, Dwarkamaiâ€¦"
+              placeholder="Search chapters — Udi, Mahasamadhi, Dwarkamai…"
               className="w-full rounded-xl border border-line bg-bg-deep/60 px-4 py-3 pl-11 text-sm text-ink placeholder:text-ink-faint outline-none transition-colors focus:border-ember/70"
             />
           </div>
@@ -196,13 +198,13 @@ export default function Satcharitra() {
 
                 <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
                   <span className="text-[11px] text-ink-faint">
-                    Day {c.day} Â· {c.verses} ovis
+                    Day {c.day} · {c.verses} ovis
                   </span>
                   <button
                     onClick={() => setReading(c)}
                     className="text-[12px] text-gold transition-colors hover:text-ember"
                   >
-                    Read â†’
+                    Read →
                   </button>
                 </div>
               </Panel>
@@ -263,7 +265,7 @@ function ReaderModal({
         <div className="text-center">
           <OmMark size={26} className="mx-auto text-gold" />
           <p className="mt-4 text-[10px] uppercase tracking-[0.34em] text-gold">
-            Adhyaya {chapter.n} Â· Day {chapter.day} of the Saptah
+            Adhyaya {chapter.n} · Day {chapter.day} of the Saptah
           </p>
           <h2 className="mt-4 text-balance font-display text-3xl leading-snug">{chapter.title}</h2>
           <Divider className="mx-auto mt-7 max-w-xs" icon="diya" />
@@ -272,9 +274,9 @@ function ReaderModal({
         <p className="mt-8 font-quote text-[21px] italic leading-[1.75] text-ink">{chapter.excerpt}</p>
 
         <p className="mt-7 text-[14px] leading-[1.9] text-ink-soft">
-          The full ovi text of this chapter sits here in the published edition â€” {chapter.verses} verses in the
+          The full ovi text of this chapter sits here in the published edition — {chapter.verses} verses in the
           original Marathi, with English, Hindi, Telugu and Tamil translations side by side. In this demonstration
-          build the reader shows the chapterâ€™s opening passage only; the complete text arrives with the backend,
+          build the reader shows the chapter’s opening passage only; the complete text arrives with the backend,
           along with the recorded parayan audio read by the temple archakas.
         </p>
 
