@@ -7,7 +7,7 @@ import { Diya } from './Sacred'
  * Circular countdown to the next aarti at the selected sannidhi.
  * The ring fills across the gap between the previous and next aarti.
  */
-export function AartiRing({ temple, size = 220 }: { temple: Temple; size?: number }) {
+export function AartiRing({ temple, size = 184 }: { temple: Temple; size?: number }) {
   useTick(20_000)
   const status = aartiStatus(temple)
   const { h, m } = countdownParts(status.minutesUntil)
@@ -16,20 +16,20 @@ export function AartiRing({ temple, size = 220 }: { temple: Temple; size?: numbe
   const span = status.tomorrow ? 600 : 300
   const progress = status.live ? 1 : Math.max(0.03, 1 - Math.min(1, status.minutesUntil / span))
 
-  const r = 46
+  const r = 50
   const c = 2 * Math.PI * r
 
   return (
-    <div className="relative grid place-items-center" style={{ width: size, height: size }}>
-      <svg viewBox="0 0 120 120" className="absolute inset-0 -rotate-90">
-        <circle cx="60" cy="60" r={r} fill="none" stroke="var(--c-line)" strokeWidth="2" />
+    <div className="relative mx-auto flex flex-col items-center justify-center" style={{ width: size, height: size }}>
+      <svg viewBox="0 0 120 120" className="absolute inset-0 h-full w-full -rotate-90">
+        <circle cx="60" cy="60" r={r} fill="none" stroke="var(--c-line)" strokeWidth="2.5" />
         <circle
           cx="60"
           cy="60"
           r={r}
           fill="none"
           stroke="url(#ringGrad)"
-          strokeWidth="3"
+          strokeWidth="3.5"
           strokeLinecap="round"
           strokeDasharray={c}
           strokeDashoffset={c * (1 - progress)}
@@ -50,7 +50,7 @@ export function AartiRing({ temple, size = 220 }: { temple: Temple; size?: numbe
               key={a.key}
               cx={60 + r * Math.cos(rad)}
               cy={60 + r * Math.sin(rad)}
-              r={a.key === status.aarti.key ? 3.4 : 2}
+              r={a.key === status.aarti.key ? 3.5 : 2}
               fill={a.key === status.aarti.key ? 'var(--c-ember)' : 'var(--c-gold)'}
               fillOpacity={a.key === status.aarti.key ? 1 : 0.45}
               className="rotate-90 origin-center"
@@ -59,23 +59,25 @@ export function AartiRing({ temple, size = 220 }: { temple: Temple; size?: numbe
         })}
       </svg>
 
-      <div className="relative z-10 text-center">
-        <Diya size={30} className="mx-auto" />
-        <p className="mt-2 text-[10px] uppercase tracking-[0.3em] text-gold">
-          {status.live ? 'Aarti in progress' : status.tomorrow ? 'Tomorrow' : 'Next aarti'}
+      <div className="relative z-10 flex flex-col items-center justify-center px-3 text-center">
+        <Diya size={22} className="mx-auto" />
+        <p className="mt-1 text-[9px] font-bold uppercase tracking-[0.25em] text-gold">
+          {status.live ? 'Aarti Live' : status.tomorrow ? 'Tomorrow' : 'Next Aarti'}
         </p>
-        <p className="mt-1 font-display text-lg leading-tight text-ink">{status.aarti.name}</p>
-        <p className="mt-0.5 font-deva text-[13px] text-gold-light/80">{status.aarti.sanskrit}</p>
+        <p className="mt-0.5 font-display text-[15.5px] font-semibold leading-tight text-ink">
+          {status.aarti.name}
+        </p>
+        <p className="font-deva text-[12px] text-saffron/90">{status.aarti.sanskrit}</p>
         {status.live ? (
-          <p className="mt-2 inline-flex items-center gap-1.5 text-[12px] text-ember">
-            <span className="size-1.5 animate-pulse rounded-full bg-ember" /> happening now
+          <p className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-ember">
+            <span className="size-1.5 animate-pulse rounded-full bg-ember" /> Happening Now
           </p>
         ) : (
-          <p className="mt-2 font-display text-2xl ember-text">
+          <p className="mt-1 font-display text-xl font-bold ember-text leading-tight">
             {h > 0 ? `${h}h ${m}m` : `${m} min`}
           </p>
         )}
-        <p className="mt-1 text-[11px] text-ink-faint">
+        <p className="mt-0.5 text-[10.5px] font-medium text-ink-faint">
           {to12h(status.aarti.time)} {temple.tzLabel}
         </p>
       </div>

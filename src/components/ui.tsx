@@ -7,13 +7,19 @@ import { Divider, Mandala } from './Sacred'
 
 /* ---------------- Buttons ---------------- */
 
-type ButtonVariant = 'primary' | 'ghost' | 'outline' | 'quiet'
+type ButtonVariant = 'primary' | 'saffron' | 'maroon' | 'gold' | 'ghost' | 'outline' | 'quiet'
 
 const buttonStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-gradient-to-br from-ember-soft via-ember to-[color-mix(in_srgb,var(--c-ember)_72%,var(--c-kumkum))] text-[#1a0d04] font-medium shadow-[0_14px_38px_-18px_var(--c-ember)] hover:brightness-110',
-  ghost: 'bg-surface-2/70 text-ink border border-line hover:border-line-strong hover:bg-surface-2',
-  outline: 'border border-line-strong text-gold-light hover:bg-gold/10',
+    'bg-gradient-to-br from-saffron-light via-saffron to-[color-mix(in_srgb,var(--c-saffron)_75%,var(--c-crimson))] text-white font-medium shadow-[0_12px_28px_-12px_rgba(230,81,0,0.65)] hover:brightness-110 hover:shadow-[0_16px_34px_-10px_rgba(230,81,0,0.8)]',
+  saffron:
+    'bg-gradient-to-br from-[#ff9100] via-[#ff6f00] to-[#e65100] text-white font-medium shadow-[0_12px_28px_-12px_rgba(230,81,0,0.65)] hover:brightness-110',
+  maroon:
+    'bg-gradient-to-br from-[#b71c1c] to-[#880e4f] text-white font-medium shadow-[0_12px_28px_-12px_rgba(136,14,79,0.55)] hover:brightness-110',
+  gold:
+    'bg-gradient-to-br from-[#ffd54f] via-[#ffb300] to-[#d4af37] text-[#1c140e] font-medium shadow-[0_12px_28px_-12px_rgba(212,175,55,0.6)] hover:brightness-105',
+  ghost: 'bg-surface text-ink border border-line hover:border-line-strong hover:bg-surface-2 shadow-sm',
+  outline: 'border border-line-strong text-ink-soft hover:text-ink hover:border-saffron hover:bg-saffron/10',
   quiet: 'text-ink-soft hover:text-ink',
 }
 
@@ -44,11 +50,11 @@ export function Button({
 }: ButtonProps) {
   const sizes = {
     sm: 'px-4 py-2 text-[13px]',
-    md: 'px-6 py-3 text-sm',
-    lg: 'px-8 py-4 text-base',
+    md: 'px-5 py-2.5 text-sm',
+    lg: 'px-7 py-3.5 text-base font-medium',
   }
   const cls = cn(
-    'inline-flex items-center justify-center gap-2 rounded-full tracking-wide transition-all duration-300 active:scale-[0.97] disabled:opacity-45 disabled:pointer-events-none',
+    'inline-flex items-center justify-center gap-2 rounded-full tracking-wide transition-all duration-300 active:scale-[0.97] disabled:opacity-45 disabled:pointer-events-none cursor-pointer',
     buttonStyles[variant],
     sizes[size],
     full && 'w-full',
@@ -82,7 +88,7 @@ export function Section({
   wide?: boolean
 }) {
   return (
-    <section id={id} className={cn('px-5 py-16 sm:px-8 sm:py-20', className)}>
+    <section id={id} className={cn('px-5 py-8 sm:px-8 sm:py-10', className)}>
       <div className={cn('mx-auto', wide ? 'max-w-[1400px]' : 'max-w-6xl')}>{children}</div>
     </section>
   )
@@ -106,17 +112,17 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        'reveal mb-12',
-        align === 'center' ? 'text-center' : 'flex flex-wrap items-end justify-between gap-6 text-left',
+        'reveal mb-6 sm:mb-8',
+        align === 'center' ? 'text-center' : 'flex flex-wrap items-end justify-between gap-5 text-left',
       )}
     >
       <div className={cn(align === 'center' && 'mx-auto max-w-2xl')}>
         {eyebrow && (
-          <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.42em] text-gold">{eyebrow}</p>
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.38em] text-saffron">{eyebrow}</p>
         )}
-        <Tag className="text-balance text-3xl leading-tight sm:text-4xl md:text-[2.7rem]">{title}</Tag>
-        {sub && <p className="mt-4 text-pretty text-[15px] leading-relaxed text-ink-soft">{sub}</p>}
-        {align === 'center' && <Divider className="mx-auto mt-7 max-w-xs" />}
+        <Tag className="text-balance text-2xl leading-tight sm:text-3xl md:text-[2.5rem] font-display">{title}</Tag>
+        {sub && <p className="mt-2.5 text-pretty text-[14.5px] leading-relaxed text-ink-soft">{sub}</p>}
+        {align === 'center' && <Divider className="mx-auto mt-5 max-w-xs" />}
       </div>
       {action && <div className="shrink-0">{action}</div>}
     </div>
@@ -217,18 +223,31 @@ export function Chip({
   )
 }
 
-export function Badge({ children, tone = 'gold' }: { children: ReactNode; tone?: 'gold' | 'ember' | 'neem' | 'kumkum' }) {
+export function Badge({
+  children,
+  tone = 'gold',
+  className,
+}: {
+  children: ReactNode
+  tone?: 'gold' | 'saffron' | 'maroon' | 'amber' | 'neem' | 'navy' | 'ember' | 'kumkum'
+  className?: string
+}) {
   const tones = {
-    gold: 'bg-gold/14 text-gold-light border-gold/30',
-    ember: 'bg-ember/16 text-ember-soft border-ember/35',
-    neem: 'bg-neem/18 text-neem border-neem/40',
-    kumkum: 'bg-kumkum/16 text-kumkum border-kumkum/35',
+    gold: 'bg-[#ffb300]/15 text-[#8a6520] dark:text-[#ffd54f] border-[#d4af37]/40',
+    saffron: 'bg-[#e65100]/12 text-[#e65100] dark:text-[#ff9100] border-[#e65100]/35 font-semibold',
+    maroon: 'bg-[#880e4f]/12 text-[#880e4f] dark:text-[#f48fb1] border-[#880e4f]/35 font-semibold',
+    amber: 'bg-[#ffa000]/15 text-[#b26a00] dark:text-[#ffca28] border-[#ffa000]/40',
+    neem: 'bg-[#2f6354]/14 text-[#2f6354] dark:text-[#80cbc4] border-[#2f6354]/35 font-semibold',
+    navy: 'bg-[#1a2530]/12 text-[#1a2530] dark:text-[#90caf9] border-[#1a2530]/30',
+    ember: 'bg-saffron/15 text-saffron border-saffron/35',
+    kumkum: 'bg-[#b71c1c]/15 text-[#b71c1c] dark:text-[#ef9a9a] border-[#b71c1c]/35 font-semibold',
   }
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[10.5px] font-medium uppercase tracking-[0.16em]',
+        'inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[10.5px] uppercase tracking-[0.16em] shadow-xs',
         tones[tone],
+        className,
       )}
     >
       {children}
@@ -239,21 +258,34 @@ export function Badge({ children, tone = 'gold' }: { children: ReactNode; tone?:
 export function Progress({ value, max, className }: { value: number; max: number; className?: string }) {
   const pct = Math.min(100, Math.round((value / max) * 100))
   return (
-    <div className={cn('h-1.5 w-full overflow-hidden rounded-full bg-surface-2', className)}>
+    <div className={cn('h-2 w-full overflow-hidden rounded-full bg-surface-2 border border-line/50', className)}>
       <div
-        className="h-full rounded-full bg-gradient-to-r from-gold via-ember-soft to-ember transition-[width] duration-1000"
+        className="h-full rounded-full bg-gradient-to-r from-saffron via-amber to-gold-metallic transition-[width] duration-1000 shadow-xs"
         style={{ width: `${pct}%` }}
       />
     </div>
   )
 }
 
-export function Stat({ value, label, sub }: { value: ReactNode; label: string; sub?: string }) {
+export function Stat({
+  value,
+  label,
+  sub,
+  icon,
+  className,
+}: {
+  value: ReactNode
+  label: string
+  sub?: string
+  icon?: ReactNode
+  className?: string
+}) {
   return (
-    <div className="text-center">
-      <div className="font-display text-3xl ember-text sm:text-4xl">{value}</div>
-      <div className="mt-1.5 text-[11px] uppercase tracking-[0.26em] text-ink-faint">{label}</div>
-      {sub && <div className="mt-1 text-xs text-ink-soft">{sub}</div>}
+    <div className={cn('rounded-2xl border border-line bg-surface/70 px-4 py-3.5 text-center shadow-xs transition-all hover:border-saffron/40 hover:-translate-y-0.5', className)}>
+      {icon && <div className="mb-1.5 flex justify-center text-saffron">{icon}</div>}
+      <div className="font-display text-2xl sm:text-3xl text-saffron font-medium">{value}</div>
+      <div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-ink">{label}</div>
+      {sub && <div className="mt-0.5 text-[11.5px] text-ink-soft">{sub}</div>}
     </div>
   )
 }

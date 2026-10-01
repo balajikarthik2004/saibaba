@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#120A06" />
+    <meta name="theme-color" content="#FDFBF7" />
     <meta
       name="description"
       content="Sai Sannidhi — the devotee companion for Shirdi Sai Baba temples across the United States. Aarti timings, seva booking, live darshan, Satcharitra parayan, annadanam and more."
@@ -20,7 +20,7 @@
       // Apply the saved theme before first paint so there is no flash.
       try {
         var t = localStorage.getItem('sai.theme');
-        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t === 'dark' ? 'dark' : 'light';
       } catch (e) {}
     </script>
   </head>

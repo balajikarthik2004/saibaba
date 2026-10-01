@@ -113,7 +113,7 @@ const AppCtx = createContext<Ctx | null>(null)
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [templeId, setTempleIdState] = useState(() => readStore(K.temple, temples[0].id))
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => readStore<'dark' | 'light'>(K.theme, 'dark'))
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => readStore<'dark' | 'light'>(K.theme, 'light'))
   const [lang, setLangState] = useState<LangCode>(() => readStore<LangCode>(K.lang, 'en'))
   const [cart, setCart] = useState<CartLine[]>(() => readStore<CartLine[]>(K.cart, []))
   const [bookings, setBookings] = useState<Booking[]>(() => readStore<Booking[]>(K.bookings, seedBookings))

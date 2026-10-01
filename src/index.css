@@ -11,6 +11,7 @@
   --color-bg-deep: var(--c-bg-deep);
   --color-surface: var(--c-surface);
   --color-surface-2: var(--c-surface-2);
+  --color-surface-card: var(--c-surface-card);
   --color-line: var(--c-line);
   --color-line-strong: var(--c-line-strong);
 
@@ -18,12 +19,21 @@
   --color-ink-soft: var(--c-ink-soft);
   --color-ink-faint: var(--c-ink-faint);
 
-  --color-ember: var(--c-ember);
-  --color-ember-soft: var(--c-ember-soft);
+  --color-saffron: var(--c-saffron);
+  --color-saffron-light: var(--c-saffron-light);
+  --color-amber: var(--c-amber);
+  --color-amber-light: var(--c-amber-light);
+  --color-maroon: var(--c-maroon);
+  --color-crimson: var(--c-crimson);
   --color-gold: var(--c-gold);
   --color-gold-light: var(--c-gold-light);
-  --color-kumkum: var(--c-kumkum);
+  --color-gold-metallic: var(--c-gold-metallic);
   --color-neem: var(--c-neem);
+  --color-neem-light: var(--c-neem-light);
+  --color-navy: var(--c-navy);
+  --color-ember: var(--c-ember);
+  --color-ember-soft: var(--c-ember-soft);
+  --color-kumkum: var(--c-kumkum);
   --color-sandal: var(--c-sandal);
 
   --font-display: "Marcellus", Georgia, serif;
@@ -39,64 +49,88 @@
 }
 
 :root,
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Palette A & B: Divine Saffron, Rich Gold, Velvet Maroon on Pure Ivory/Cream */
+  --c-bg: #fdfbf7;
+  --c-bg-deep: #f5efe6;
+  --c-surface: #ffffff;
+  --c-surface-2: #fff9ee;
+  --c-surface-card: #ffffff;
+  --c-line: rgb(212 175 55 / 0.22);
+  --c-line-strong: rgb(183 28 28 / 0.38);
+
+  --c-ink: #1c140e;
+  --c-ink-soft: #544335;
+  --c-ink-faint: #826e5b;
+
+  /* Palette A & B tokens */
+  --c-saffron: #e65100;
+  --c-saffron-light: #ff6f00;
+  --c-amber: #ffa000;
+  --c-amber-light: #ffb300;
+  --c-maroon: #880e4f;
+  --c-crimson: #b71c1c;
+  --c-gold: #c59b27;
+  --c-gold-light: #8a6520;
+  --c-gold-metallic: #d4af37;
+  --c-neem: #2f6354;
+  --c-neem-light: #438a76;
+  --c-navy: #1a2530;
+
+  --c-ember: #e65100;
+  --c-ember-soft: #ff6f00;
+  --c-kumkum: #b71c1c;
+  --c-sandal: #2e1d0e;
+
+  --veil-opacity: 0.18;
+  --glow: 0 0 50px -16px rgb(230 81 0 / 0.4);
+  --card-shadow: 0 16px 36px -24px rgb(80 50 10 / 0.18), 0 2px 6px 0 rgb(0 0 0 / 0.04);
+  --veil: rgb(253 251 247 / 0.92);
+  --img-shade: rgb(46 29 14 / 0.16);
+}
+
 [data-theme="dark"] {
   color-scheme: dark;
 
-  /* Warm charcoal rather than brown — brown-on-brown read as muddy, and
-     photographs sat badly on it. Surfaces now step cleanly apart. */
-  --c-bg: #0d0b09;
-  --c-bg-deep: #060504;
-  --c-surface: #17130f;
-  --c-surface-2: #221c16;
-  --c-line: rgb(214 178 110 / 0.16);
-  --c-line-strong: rgb(214 178 110 / 0.46);
+  /* Palette B: Peaceful & Meditative Dark + Midnight Navy */
+  --c-bg: #0c0f14;
+  --c-bg-deep: #07090c;
+  --c-surface: #141922;
+  --c-surface-2: #1c2330;
+  --c-surface-card: #18202c;
+  --c-line: rgb(212 175 55 / 0.18);
+  --c-line-strong: rgb(212 175 55 / 0.45);
 
-  /* Raised contrast: ink-faint was failing against the surface. */
-  --c-ink: #f7f1e8;
-  --c-ink-soft: #cdc1b1;
-  --c-ink-faint: #a09384;
+  --c-ink: #fdfbf7;
+  --c-ink-soft: #d3c8ba;
+  --c-ink-faint: #9c8e7c;
 
-  --c-ember: #fb923c;
-  --c-ember-soft: #fcd34d;
-  --c-gold: #d9b26a;
-  --c-gold-light: #f2e2bb;
-  --c-kumkum: #e0564f;
+  /* Palette A & B constants */
+  --c-saffron: #ff6f00;
+  --c-saffron-light: #ff9100;
+  --c-amber: #ffa000;
+  --c-amber-light: #ffb300;
+  --c-maroon: #880e4f;
+  --c-crimson: #b71c1c;
+  --c-gold: #d4af37;
+  --c-gold-light: #f3e5ab;
+  --c-gold-metallic: #d4af37;
   --c-neem: #5aa58b;
-  --c-sandal: #f7f1e8;
+  --c-neem-light: #80cbc4;
+  --c-navy: #1a2530;
 
-  --veil-opacity: 0.1;
-  --glow: 0 0 60px -14px rgb(251 146 60 / 0.5);
-  --card-shadow: 0 20px 48px -28px rgb(0 0 0 / 0.78);
-  --veil: rgb(13 11 9 / 0.82);
-  --img-shade: rgb(13 11 9 / 0.3);
-}
+  --c-ember: #ff6f00;
+  --c-ember-soft: #ffa000;
+  --c-kumkum: #b71c1c;
+  --c-sandal: #fdfbf7;
 
-[data-theme="light"] {
-  color-scheme: light;
-  --c-bg: #fbf4e6;
-  --c-bg-deep: #f3e8d2;
-  --c-surface: #fffaf0;
-  --c-surface-2: #f7edd9;
-  --c-line: rgb(123 86 32 / 0.18);
-  --c-line-strong: rgb(123 86 32 / 0.38);
-
-  --c-ink: #2e1d0e;
-  --c-ink-soft: #6b5133;
-  --c-ink-faint: #8d7554;
-
-  --c-ember: #d9560b;
-  --c-ember-soft: #c98309;
-  --c-gold: #a97c2a;
-  --c-gold-light: #8a6520;
-  --c-kumkum: #9f2420;
-  --c-neem: #2f6354;
-  --c-sandal: #2e1d0e;
-
-  --veil-opacity: 0.16;
-  --glow: 0 0 50px -16px rgb(217 86 11 / 0.4);
-  --card-shadow: 0 18px 40px -28px rgb(80 50 10 / 0.42);
-  --veil: rgb(251 244 230 / 0.86);
-  --img-shade: rgb(46 29 14 / 0.18);
+  --veil-opacity: 0.12;
+  --glow: 0 0 60px -14px rgb(255 111 0 / 0.5);
+  --card-shadow: 0 20px 48px -28px rgb(0 0 0 / 0.82);
+  --veil: rgb(12 15 20 / 0.88);
+  --img-shade: rgb(12 15 20 / 0.35);
 }
 
 * {
@@ -186,7 +220,14 @@ h1, h2, h3, h4, .font-display {
 }
 
 @utility ember-text {
-  background: linear-gradient(100deg, var(--c-gold-light), var(--c-ember-soft) 42%, var(--c-ember) 72%, var(--c-gold));
+  background: linear-gradient(100deg, var(--c-gold), var(--c-amber) 35%, var(--c-saffron) 70%, var(--c-gold));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility divine-text {
+  background: linear-gradient(110deg, var(--c-saffron), var(--c-amber) 48%, var(--c-gold));
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -196,12 +237,34 @@ h1, h2, h3, h4, .font-display {
   box-shadow: 0 0 0 1px var(--c-line-strong), 0 0 40px -18px var(--c-ember);
 }
 
-/* Photographs sit on a warm scrim so overlaid type stays legible in both
-   themes, and lose a little saturation so the gold UI still leads. */
+@utility velvet-badge {
+  background: linear-gradient(135deg, rgba(136, 14, 79, 0.12), rgba(183, 28, 28, 0.18));
+  border: 1px solid rgba(183, 28, 28, 0.35);
+  color: var(--c-crimson);
+}
+
+@utility saffron-badge {
+  background: linear-gradient(135deg, rgba(230, 81, 0, 0.12), rgba(255, 111, 0, 0.18));
+  border: 1px solid rgba(230, 81, 0, 0.35);
+  color: var(--c-saffron);
+}
+
+@utility gold-border-glow {
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 24px -8px rgba(212, 175, 55, 0.3);
+}
+
+@utility sacred-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  box-shadow: 0 10px 30px -15px rgba(80, 40, 10, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* Photographs sit on a subtle warm scrim only where needed */
 @utility photo-scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, var(--c-surface) 2%, color-mix(in srgb, var(--c-surface) 55%, transparent) 38%, transparent 78%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 20%, transparent 40%);
 }
 
 @utility photo-tint {
@@ -212,6 +275,34 @@ h1, h2, h3, h4, .font-display {
   box-shadow:
     0 1px 0 0 color-mix(in srgb, var(--c-gold) 9%, transparent) inset,
     var(--card-shadow);
+}
+
+@utility temple-futuristic-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.06);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: rgba(230, 81, 0, 0.65);
+    box-shadow: 0 24px 48px -16px rgba(230, 81, 0, 0.22),
+                0 0 0 1px rgba(212, 175, 55, 0.45);
+  }
+}
+
+.temple-photo-zoom {
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+  will-change: transform;
+}
+
+.group:hover .temple-photo-zoom {
+  transform: scale(1.055) !important;
 }
 
 /* ============================================================

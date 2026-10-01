@@ -29,6 +29,114 @@ export function OmMark({ className = '', size = 28 }: { className?: string; size
   )
 }
 
+/** Sacred Padukas (Divine Footwear of Sai Baba) */
+export function PadukasIcon({ className = '', size = 28 }: { className?: string; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className} aria-hidden="true">
+      {/* Left Paduka */}
+      <rect x="9" y="8" width="12" height="32" rx="6" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="15" cy="14" r="2" fill="currentColor" />
+      <path d="M15 16v18" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 3" />
+      
+      {/* Right Paduka */}
+      <rect x="27" y="8" width="12" height="32" rx="6" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.15" />
+      <circle cx="33" cy="14" r="2" fill="currentColor" />
+      <path d="M33 16v18" stroke="currentColor" strokeWidth="1.5" strokeDasharray="2 3" />
+    </svg>
+  )
+}
+
+/** Sacred Fire (Dhuni) with Udi Pot */
+export function DhuniPotIcon({ className = '', size = 28 }: { className?: string; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className} aria-hidden="true">
+      {/* Flames */}
+      <path
+        d="M24 6c3 5 6 9 6 13a6 6 0 0 1-12 0c0-4 3-8 6-13Z"
+        fill="var(--c-saffron, #e65100)"
+        className="animate-flicker"
+      />
+      <path
+        d="M24 13c1.5 2.5 3 4.5 3 6.5a3 3 0 0 1-6 0c0-2 1.5-4 3-6.5Z"
+        fill="var(--c-amber, #ffa000)"
+      />
+      {/* Pot / Bowl */}
+      <path
+        d="M10 28h28c0 8-6 14-14 14S10 36 10 28Z"
+        fill="currentColor"
+        fillOpacity="0.2"
+        stroke="currentColor"
+        strokeWidth="2"
+      />
+      <line x1="8" y1="28" x2="40" y2="28" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      <path d="M16 34h16" stroke="var(--c-gold, #d4af37)" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+/** Neem Tree Leaves (Medicinal Light / Shirdi Gurusthan) */
+export function NeemLeafIcon({ className = '', size = 28 }: { className?: string; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className} aria-hidden="true">
+      <path d="M24 40V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      {/* Top Leaf */}
+      <path d="M24 8c-4 5-4 12 0 16 4-4 4-11 0-16Z" fill="currentColor" fillOpacity="0.25" stroke="currentColor" strokeWidth="1.5" />
+      {/* Left Leaves */}
+      <path d="M24 20c-7-3-12 1-14 7 6 2 11-2 14-7Z" fill="currentColor" fillOpacity="0.2" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M24 29c-6-2-10 1-12 6 5 2 9-1 12-6Z" fill="currentColor" fillOpacity="0.2" stroke="currentColor" strokeWidth="1.5" />
+      {/* Right Leaves */}
+      <path d="M24 20c7-3 12 1 14 7-6 2-11-2-14-7Z" fill="currentColor" fillOpacity="0.2" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M24 29c6-2 10 1 12 6-5 2-9-1-12-6Z" fill="currentColor" fillOpacity="0.2" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  )
+}
+
+/** Satka (Stick) & Chimta (Tongs) */
+export function SatkaChimtaIcon({ className = '', size = 28 }: { className?: string; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className} aria-hidden="true">
+      {/* Satka / Stick */}
+      <line x1="12" y1="36" x2="36" y2="12" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+      <circle cx="36" cy="12" r="3" fill="var(--c-gold, #d4af37)" />
+      {/* Chimta / Tongs */}
+      <path d="M14 14l10 10 10-10" stroke="var(--c-saffron, #e65100)" strokeWidth="2.5" strokeLinecap="round" />
+      <circle cx="24" cy="24" r="2" fill="currentColor" />
+      <line x1="24" y1="24" x2="24" y2="38" stroke="var(--c-saffron, #e65100)" strokeWidth="2.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+/** Bhiksha Bowl (Begging Bowl with Prasad) */
+export function BhikshaBowlIcon({ className = '', size = 28 }: { className?: string; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" className={className} aria-hidden="true">
+      <path
+        d="M8 22h32c0 10-7 18-16 18S8 32 8 22Z"
+        fill="currentColor"
+        fillOpacity="0.2"
+        stroke="currentColor"
+        strokeWidth="2"
+      />
+      <ellipse cx="24" cy="22" rx="16" ry="4" stroke="currentColor" strokeWidth="1.8" fill="var(--c-surface-2, #fff9ee)" />
+      <circle cx="24" cy="16" r="2.5" fill="var(--c-amber, #ffa000)" />
+      <path d="M20 18q4-6 8 0" stroke="var(--c-gold, #d4af37)" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+/** Minimalist Sacred Geometry (Yantra / Mandalic Star) */
+export function SacredGeometryPattern({ className = '', size = 32 }: { className?: string; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 64 64" fill="none" className={className} aria-hidden="true">
+      <circle cx="32" cy="32" r="30" stroke="currentColor" strokeWidth="1" strokeOpacity="0.4" />
+      <circle cx="32" cy="32" r="22" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" strokeOpacity="0.6" />
+      <polygon points="32,6 56,48 8,48" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.5" fill="none" />
+      <polygon points="32,58 8,16 56,16" stroke="currentColor" strokeWidth="1.2" strokeOpacity="0.5" fill="none" />
+      <circle cx="32" cy="32" r="5" fill="currentColor" fillOpacity="0.4" />
+    </svg>
+  )
+}
+
 /** Stylised seated figure with halo — a reverent abstraction, not a portrait. */
 export function BabaSilhouette({ className = '' }: { className?: string }) {
   return (
