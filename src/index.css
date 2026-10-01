@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+/* ============================================================
+   SAI SANNIDHI — Design System
+   A "dhuni at dusk" palette: ember saffron + antique gold over
+   deep sandal-brown night, with a sandalwood-parchment day mode.
+   ============================================================ */
+
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-bg-deep: var(--c-bg-deep);
+  --color-surface: var(--c-surface);
+  --color-surface-2: var(--c-surface-2);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+
+  --color-ink: var(--c-ink);
+  --color-ink-soft: var(--c-ink-soft);
+  --color-ink-faint: var(--c-ink-faint);
+
+  --color-ember: var(--c-ember);
+  --color-ember-soft: var(--c-ember-soft);
+  --color-gold: var(--c-gold);
+  --color-gold-light: var(--c-gold-light);
+  --color-kumkum: var(--c-kumkum);
+  --color-neem: var(--c-neem);
+  --color-sandal: var(--c-sandal);
+
+  --font-display: "Marcellus", Georgia, serif;
+  --font-quote: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-deva: "Tiro Devanagari Hindi", "Noto Serif Devanagari", serif;
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 34px;
+}
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --c-bg: #120a06;
+  --c-bg-deep: #0a0503;
+  --c-surface: #1d120b;
+  --c-surface-2: #261810;
+  --c-line: rgb(201 161 74 / 0.18);
+  --c-line-strong: rgb(201 161 74 / 0.42);
+
+  --c-ink: #f8eedd;
+  --c-ink-soft: #d3bfa3;
+  --c-ink-faint: #9b876c;
+
+  --c-ember: #f97316;
+  --c-ember-soft: #fbbf24;
+  --c-gold: #c9a14a;
+  --c-gold-light: #ecd9a8;
+  --c-kumkum: #b8302f;
+  --c-neem: #3f7d68;
+  --c-sandal: #f6ecda;
+
+  --glow: 0 0 60px -12px rgb(249 115 22 / 0.55);
+  --card-shadow: 0 24px 60px -32px rgb(0 0 0 / 0.9);
+  --veil: rgb(18 10 6 / 0.72);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --c-bg: #fbf4e6;
+  --c-bg-deep: #f3e8d2;
+  --c-surface: #fffaf0;
+  --c-surface-2: #f7edd9;
+  --c-line: rgb(123 86 32 / 0.18);
+  --c-line-strong: rgb(123 86 32 / 0.38);
+
+  --c-ink: #2e1d0e;
+  --c-ink-soft: #6b5133;
+  --c-ink-faint: #8d7554;
+
+  --c-ember: #d9560b;
+  --c-ember-soft: #c98309;
+  --c-gold: #a97c2a;
+  --c-gold-light: #8a6520;
+  --c-kumkum: #9f2420;
+  --c-neem: #2f6354;
+  --c-sandal: #2e1d0e;
+
+  --glow: 0 0 50px -16px rgb(217 86 11 / 0.4);
+  --card-shadow: 0 20px 44px -30px rgb(80 50 10 / 0.5);
+  --veil: rgb(251 244 230 / 0.78);
+}
+
+* {
+  border-color: var(--c-line);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Parchment grain + a warm halo that follows the page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 520px at 50% -10%, rgb(249 115 22 / 0.16), transparent 70%),
+    radial-gradient(700px 420px at 100% 100%, rgb(201 161 74 / 0.1), transparent 70%);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+::selection {
+  background: var(--c-ember);
+  color: #fff;
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--c-bg-deep); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--c-gold), var(--c-ember));
+  border-radius: 99px;
+  border: 2px solid var(--c-bg-deep);
+}
+
+/* ============================================================
+   Component utilities
+   ============================================================ */
+@utility panel {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--c-surface) 92%, transparent), color-mix(in srgb, var(--c-surface-2) 88%, transparent));
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(14px);
+}
+
+@utility gold-rule {
+  background: linear-gradient(90deg, transparent, var(--c-gold), transparent);
+  height: 1px;
+}
+
+@utility ember-text {
+  background: linear-gradient(100deg, var(--c-gold-light), var(--c-ember-soft) 42%, var(--c-ember) 72%, var(--c-gold));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility ring-gold {
+  box-shadow: 0 0 0 1px var(--c-line-strong), 0 0 40px -18px var(--c-ember);
+}
+
+/* ============================================================
+   Motion
+   ============================================================ */
+@keyframes ember-rise {
+  0%   { transform: translate3d(0, 0, 0) scale(0.6); opacity: 0; }
+  12%  { opacity: 0.9; }
+  70%  { opacity: 0.55; }
+  100% { transform: translate3d(var(--dx, 18px), -340px, 0) scale(1.15); opacity: 0; }
+}
+@keyframes slow-spin { to { transform: rotate(360deg); } }
+@keyframes reverse-spin { to { transform: rotate(-360deg); } }
+@keyframes flame-flicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); opacity: 1; }
+  35%      { transform: scaleY(1.12) scaleX(0.93); opacity: 0.86; }
+  62%      { transform: scaleY(0.94) scaleX(1.05); opacity: 0.96; }
+}
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes halo-pulse {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50%      { opacity: 0.8;  transform: scale(1.06); }
+}
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-ember { animation: ember-rise linear infinite; }
+.animate-slow-spin { animation: slow-spin 60s linear infinite; }
+.animate-reverse-spin { animation: reverse-spin 90s linear infinite; }
+.animate-flicker { animation: flame-flicker 2.4s ease-in-out infinite; transform-origin: bottom center; }
+.animate-halo { animation: halo-pulse 5s ease-in-out infinite; }
+.animate-marquee { animation: marquee 38s linear infinite; }
+
+.rise-in { animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
